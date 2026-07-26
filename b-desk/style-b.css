@@ -214,7 +214,10 @@
 .panel-thumbs img { width: 100%; aspect-ratio: 642 / 900; object-fit: cover; }
 .panel-type { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--navy); }
 .panel-name { font-size: clamp(19px, 2.4vw, 24px); font-weight: 700; margin-top: 4px; }
-.panel-desc { font-size: 13px; color: var(--ink-2); margin-top: 12px; white-space: pre-line; max-height: 12.5em; overflow-y: auto; }
+/* max-height + overflow-y にすると入れ子スクロールになり、
+   スクロールできること自体が気づかれず本文が隠れる。
+   全文を流し込み、パネル本体(.panel-bd)のスクロールに一本化する */
+.panel-desc { font-size: 13px; color: var(--ink-2); margin-top: 12px; white-space: pre-line; }
 .panel-sub { font-size: 15px; font-weight: 700; margin: 0 0 12px; letter-spacing: 0.04em; }
 
 .spec { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 13px; background: var(--white); }
