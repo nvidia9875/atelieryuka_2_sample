@@ -18,6 +18,7 @@
   --accent: #38445c;
   --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
   --space-section: clamp(4rem, 3rem + 4vw, 7rem);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,11 +41,12 @@ a { color: inherit; }
 .skip-link:focus { left: 0; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
 
 /* ---- header ---- */
 .site-head {
-  padding: calc(var(--space-section) * 0.9) 0 calc(var(--space-section) * 0.7);
+  /* padding ショートハンドだと .wrap の左右余白を 0 で打ち消すため block 方向のみ指定 */
+  padding-block: calc(var(--space-section) * 0.9) calc(var(--space-section) * 0.7);
   text-align: center;
 }
 .site-head .en {
@@ -158,11 +160,13 @@ a { color: inherit; }
 .features li { padding-left: 1.2em; position: relative; }
 .features li::before { content: "・"; position: absolute; left: 0; color: var(--accent); }
 .palette { display: flex; gap: 0.5rem; align-items: center; margin-top: auto; flex-wrap: wrap; }
-.palette span {
+/* :not(.go) を外すと CTA の <span class="go"> まで 26px 角に潰れて文字が溢れる */
+.palette span:not(.go) {
   width: 26px; height: 26px;
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.12);
   display: inline-block;
+  flex: none;
 }
 .palette .go {
   margin-left: auto;
@@ -178,10 +182,12 @@ a { color: inherit; }
 /* ---- footer ---- */
 .site-foot {
   border-top: 1px solid var(--line);
-  padding: 2.5rem 0 3.5rem;
+  /* 境界線は全幅のまま、テキストだけ内側に寄せる */
+  padding: 2.5rem var(--gutter) 3.5rem;
   text-align: center;
   color: var(--ink-soft);
   font-size: 0.85rem;
+  text-wrap: pretty;
 }
 .site-foot .en {
   font-family: "Cormorant Garamond", serif;
@@ -192,9 +198,14 @@ a { color: inherit; }
 }
 
 @media (max-width: 760px) {
-  .proposal, .proposal:nth-of-type(even) { grid-template-columns: 1fr; }
+  /* 1fr は minmax(auto,1fr) 相当でトラックが min-content 未満に縮まない。
+     minmax(0,1fr) にしないとカード内容がはみ出し overflow:hidden で切れる */
+  .proposal, .proposal:nth-of-type(even) { grid-template-columns: minmax(0, 1fr); }
   .proposal:nth-of-type(even) .proposal-visual { order: 0; }
   .proposal-visual { min-height: 220px; aspect-ratio: 16 / 9; }
+  /* 狭幅では「この案を見る →」を色見本の下に落として重なりを防ぐ */
+  .palette { row-gap: 0.9rem; }
+  .palette .go { margin-left: 0; flex-basis: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
