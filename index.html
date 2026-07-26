@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>with a WISH リニューアル提案 — 3つのデザイン案</title>
+<meta name="description" content="with a WISH サイトフルリプレイスに向けた3つのデザイン方向性のご提案。各案は実際に操作できるサンプルです。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2322242a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f5f1e8' text-anchor='middle' font-style='italic'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #22242a;
+  --ink-soft: #5a5e66;
+  --paper: #f7f7f5;
+  --line: #d9dad6;
+  --accent: #38445c;
+  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --space-section: clamp(4rem, 3rem + 4vw, 7rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: #fff; padding: 0.6em 1.2em; z-index: 100;
+}
+.skip-link:focus { left: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+
+/* ---- header ---- */
+.site-head {
+  padding: calc(var(--space-section) * 0.9) 0 calc(var(--space-section) * 0.7);
+  text-align: center;
+}
+.site-head .en {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1.4rem;
+}
+.site-head h1 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.2rem + 2.4vw, 2.9rem);
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.site-head .lede {
+  max-width: 640px;
+  margin: 2rem auto 0;
+  color: var(--ink-soft);
+  text-align: left;
+}
+.site-head .lede strong { font-weight: 500; color: var(--ink); }
+
+/* ---- 前提メモ ---- */
+.premise {
+  max-width: 640px;
+  margin: 0 auto var(--space-section);
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: clamp(1.4rem, 1.2rem + 1vw, 2.2rem);
+}
+.premise h2 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  margin-bottom: 0.8rem;
+}
+.premise ul { list-style: none; }
+.premise li {
+  padding-left: 1.2em;
+  position: relative;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+.premise li::before {
+  content: "—";
+  position: absolute; left: 0;
+  color: var(--accent);
+}
+
+/* ---- proposal cards ---- */
+.proposals { display: grid; gap: clamp(2.5rem, 2rem + 3vw, 5rem); padding-bottom: var(--space-section); }
+.proposal {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  border: 1px solid var(--line);
+  background: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+.proposal:hover, .proposal:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -20px rgba(34, 36, 42, 0.3);
+}
+.proposal:nth-of-type(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.proposal:nth-of-type(even) .proposal-visual { order: 2; }
+.proposal-visual { position: relative; min-height: 300px; }
+.proposal-visual img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.proposal-visual.top img { object-position: 50% 12%; }
+.proposal-visual .letter {
+  position: absolute; top: 1.1rem; left: 1.3rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.4rem; line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 14px rgba(0,0,0,0.45);
+}
+.proposal-body { padding: clamp(1.8rem, 1.4rem + 2vw, 3.2rem); display: flex; flex-direction: column; gap: 1.1rem; }
+.proposal-body .plan-no {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  letter-spacing: 0.14em;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+.proposal-body h2 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: clamp(1.35rem, 1.2rem + 0.9vw, 1.9rem);
+  line-height: 1.45;
+  text-wrap: balance;
+}
+.proposal-body .concept { color: var(--ink-soft); }
+.audience {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.15em 0.9em;
+}
+.features { list-style: none; font-size: 0.9rem; color: var(--ink-soft); }
+.features li { padding-left: 1.2em; position: relative; }
+.features li::before { content: "・"; position: absolute; left: 0; color: var(--accent); }
+.palette { display: flex; gap: 0.5rem; align-items: center; margin-top: auto; flex-wrap: wrap; }
+.palette span {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.12);
+  display: inline-block;
+}
+.palette .go {
+  margin-left: auto;
+  white-space: nowrap;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.proposal:hover .go, .proposal:focus-visible .go { color: var(--accent); }
+
+/* ---- footer ---- */
+.site-foot {
+  border-top: 1px solid var(--line);
+  padding: 2.5rem 0 3.5rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+.site-foot .en {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  letter-spacing: 0.16em;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .proposal, .proposal:nth-of-type(even) { grid-template-columns: 1fr; }
+  .proposal:nth-of-type(even) .proposal-visual { order: 0; }
+  .proposal-visual { min-height: 220px; aspect-ratio: 16 / 9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .proposal { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-head wrap">
+  <span class="en">with a WISH — Full Replacement Proposal</span>
+  <h1>3つの「使いやすさ」を、<br>3つのデザインでご提案します。</h1>
+  <p class="lede">
+    with a WISH の本当のお客様は、全国約3,000の<strong>取扱い衣裳店さま</strong>です。
+    「業者が使いやすいサイト」という課題への答えを3通りに解釈し、
+    それぞれ<strong>実際に操作できるサンプル</strong>として制作しました。
+    トップページの第一印象を「新郎さま向け／衣裳店さま向け／両者同席」のどこに寄せるかも、
+    3案で比較いただけます。
+  </p>
+</header>
+
+<main id="main" class="wrap">
+
+  <aside class="premise" aria-label="制作の前提">
+    <h2>制作の前提</h2>
+    <ul>
+      <li>商品データは現行サイトの実データ（全125型・品番・色・ライン・サイズ・素材）を使用</li>
+      <li>写真はすべて現行サイトの実写真</li>
+      <li>空き状況・予約・ログインは提案用のデモ動作（実システム非連携）</li>
+      <li>価格は現行方針のまま非掲載（売価は各衣裳店さまにて）</li>
+    </ul>
+  </aside>
+
+  <div class="proposals">
+
+    <a class="proposal" href="a-maison/index.html">
+      <div class="proposal-visual">
+        <img src="assets/img/hero/slider02.jpg" width="1278" height="540" alt="ダークカラーのタキシードを着た新郎と純白のドレスの花嫁" loading="eager">
+        <span class="letter" aria-hidden="true">A</span>
+      </div>
+      <div class="proposal-body">
+        <span class="plan-no">Plan A — Maison Formal</span>
+        <h2>格式のメゾン</h2>
+        <span class="audience">第一印象：新郎さまファースト</span>
+        <p class="concept">
+          使いやすさ＝「新郎に見せて誇れる、信頼で選ばれるブランドサイト」。
+          ブラックタイの正統な世界観で需要をつくり、衣裳店さまへ送客する。
+          アトリエユカ（花嫁の白）と対をなす「花婿の黒」。
+        </p>
+        <ul class="features">
+          <li>衣裳店デスクを格式あるコンシェルジュカードで1階層目に</li>
+          <li>創業64年・シェアNo.1・63サイズを「数字の額縁」で語る</li>
+          <li>生地ブランドとメイキングで「扱う理由」を伝える</li>
+        </ul>
+        <div class="palette" aria-hidden="true">
+          <span style="background:#14120f"></span>
+          <span style="background:#f5f1e8"></span>
+          <span style="background:#b49b57"></span>
+          <span class="go">この案を見る →</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proposal" href="b-desk/index.html">
+      <div class="proposal-visual top">
+        <img src="assets/img/p/20423.jpg" width="642" height="900" alt="シルバーグレーのタキシードのモデル写真" loading="lazy">
+        <span class="letter" aria-hidden="true">B</span>
+      </div>
+      <div class="proposal-body">
+        <span class="plan-no">Plan B — Working Desk</span>
+        <h2>衣裳店の道具</h2>
+        <span class="audience">第一印象：衣裳店さまファースト</span>
+        <p class="concept">
+          使いやすさ＝「接客中に3クリックで目的の一着へ、そのまま予約まで」。
+          ファーストビューが業務ファインダー。日々使う道具としての機能美に全振りし、
+          レガシーな予約システムの「次の姿」を見せる。
+        </p>
+        <ul class="features">
+          <li>品番ダイレクト・即時絞り込み（ページ送りなし・全125型）</li>
+          <li>サイズ診断：3つの計測値から63サイズを自動判定→絞り込み</li>
+          <li>納期チェッカー・比較トレイ・3ステップ予約ウィザード</li>
+        </ul>
+        <div class="palette" aria-hidden="true">
+          <span style="background:#f6f6f3"></span>
+          <span style="background:#22252a"></span>
+          <span style="background:#24406e"></span>
+          <span class="go">この案を見る →</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proposal" href="c-salon/index.html">
+      <div class="proposal-visual top">
+        <img src="assets/img/p/20425.jpg" width="600" height="901" alt="ベージュのタキシードで壁にもたれるモデルのエディトリアル写真" loading="lazy">
+        <span class="letter" aria-hidden="true">C</span>
+      </div>
+      <div class="proposal-body">
+        <span class="plan-no">Plan C — Digital Salon</span>
+        <h2>接客ルックブック</h2>
+        <span class="audience">第一印象：スタッフとお客様の両者同席</span>
+        <p class="concept">
+          使いやすさ＝「店頭で新郎に見せる、最強の接客ツール」。
+          サイトそのものをラグジュアリー誌のようなデジタルカタログにして、
+          iPadを挟んだ接客の会話を設計する。
+        </p>
+        <ul class="features">
+          <li>「この一着を見せる」プレゼンモード（フルスクリーン・2着比較）</li>
+          <li>お気に入りがそのまま品番リスト＝取寄せメモになる</li>
+          <li>カラードレス×タキシードのペアリング企画（アトリエユカ連携）</li>
+        </ul>
+        <div class="palette" aria-hidden="true">
+          <span style="background:#faf7f2"></span>
+          <span style="background:#2a2724"></span>
+          <span style="background:#6e2b35"></span>
+          <span class="go">この案を見る →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <span class="en">with a WISH — MATSUO CO., LTD.</span>
+  ご選定後、この方向性をベースに全ページの設計・実装を深掘りします。
+</footer>
+
+</body>
+</html>

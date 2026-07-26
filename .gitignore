@@ -1,0 +1,6 @@
+.DS_Store
+.playwright-mcp/
+node_modules/
+
+# 社内向け提案計画メモ（公開リポジトリには含めない）
+PLAN.md
