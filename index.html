@@ -513,6 +513,12 @@
 
     <div class="cat-foot">
       <p class="cat-count" id="cat-count" role="status" aria-live="polite"></p>
+      <div class="cat-zoom" role="group" aria-label="表示倍率">
+        <button type="button" class="cat-zbtn" id="cat-zoom-out" aria-label="縮小">&minus;</button>
+        <button type="button" class="cat-zbtn cat-zval" id="cat-zoom-reset" aria-label="等倍に戻す"><span id="cat-zoom-val">100%</span></button>
+        <button type="button" class="cat-zbtn" id="cat-zoom-in" aria-label="拡大">&plus;</button>
+        <span class="cat-hint" id="cat-hint" hidden>ドラッグで移動</span>
+      </div>
       <label class="cat-slider">
         <span class="vh">ページ位置</span>
         <input class="cat-range" type="range" id="cat-range" min="1" max="58" step="1" value="1">

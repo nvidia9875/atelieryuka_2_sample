@@ -67,7 +67,8 @@
 .cat-x:hover { border-color: var(--gold); color: var(--gold-text); }
 
 /* ---------- 誌面 ---------- */
-.cat-stage { position: relative; min-width: 0; min-height: 0; }
+/* 拡大時はトラックごと拡大するので、はみ出しはここで切る */
+.cat-stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
 
 .cat-track {
   display: flex;
@@ -78,9 +79,27 @@
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  /* SPの1本指スワイプは横めくりに使う（縦スクロールには渡さない） */
+  touch-action: pan-x;
+  transform-origin: 50% 50%;
 }
 .cat-track::-webkit-scrollbar { display: none; }
 .cat-track:focus-visible { outline: 2px solid var(--gold); outline-offset: -4px; }
+
+/* ---------- 拡大中 ----------
+   ページ送りのスナップを止め、1本指はスワイプではなく移動に使う。
+   touch-action: none にしないと、ドラッグをブラウザの横スクロールに取られる */
+.cat-stage.is-zoomed .cat-track {
+  scroll-snap-type: none;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  will-change: transform;
+}
+.cat-stage.is-zoomed .cat-track.is-grabbing { cursor: grabbing; }
+/* 拡大中はページ内で画像を切り、隣のページにはみ出させない */
+.cat-stage.is-zoomed .cat-page { overflow: hidden; }
+.cat-stage.is-zoomed .cat-page img { box-shadow: none; }
 
 /* トラックには padding を置かない。置くと 1画面 ≠ clientWidth になり、
    scrollBy(clientWidth) の送り量とスナップ位置がずれる。逃げは各ページ側で取る */
@@ -99,6 +118,10 @@
   object-fit: contain;
   background: var(--paper);
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.6);
+  /* 画像の上でドラッグするとブラウザ標準の画像ドラッグが始まり、
+     pointercancel が飛んで移動が1歩で止まる */
+  -webkit-user-drag: none;
+  user-select: none; -webkit-user-select: none;
 }
 
 /* ---------- 送りボタン（PCのみ。SPはスワイプ） ---------- */
@@ -146,12 +169,38 @@
 /* ---------- 下部バー ---------- */
 .cat-foot {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: auto auto minmax(0, 1fr);
   align-items: center;
   gap: 0.5em clamp(12px, 3vw, 24px);
   padding: 0.7em clamp(12px, 3vw, 24px) 0.9em;
   border-top: 1px solid var(--gold-line);
   background: var(--ink);
+}
+
+/* ---------- 倍率 ---------- */
+.cat-zoom { display: flex; align-items: center; gap: 6px; }
+.cat-zbtn {
+  min-width: 34px; height: 34px;
+  display: grid; place-items: center;
+  background: none;
+  border: 1px solid var(--line-strong);
+  color: var(--ivory);
+  font-size: var(--fs-md); line-height: 1;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: border-color var(--duration-fast, 150ms) ease, color var(--duration-fast, 150ms) ease;
+}
+.cat-zbtn:hover:not([disabled]) { border-color: var(--gold); color: var(--gold-text); }
+.cat-zbtn[disabled] { opacity: 0.3; cursor: default; }
+.cat-zval {
+  min-width: 62px;
+  font-size: var(--fs-xs); font-weight: var(--wt-small); letter-spacing: var(--ls-tight);
+}
+.cat-hint {
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  letter-spacing: var(--ls-body);
+  color: var(--gold-text);
+  white-space: nowrap;
 }
 .cat-count {
   font-size: var(--fs-sm); font-weight: var(--wt-small);
@@ -209,7 +258,8 @@
   .cat-btn { padding: 0.5em 0.7em; letter-spacing: var(--ls-body); }
   .cat-meta { display: none; }
   .cat-x { width: 38px; height: 38px; }
-  .cat-foot { grid-template-columns: 1fr; }
+  .cat-foot { grid-template-columns: auto minmax(0, 1fr); }
+  .cat-slider { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
