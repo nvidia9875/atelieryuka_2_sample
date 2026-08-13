@@ -3,336 +3,567 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>with a WISH リニューアル提案 — 3つのデザイン案</title>
-<meta name="description" content="with a WISH サイトフルリプレイスに向けた3つのデザイン方向性のご提案。各案は実際に操作できるサンプルです。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2322242a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f5f1e8' text-anchor='middle' font-style='italic'%3EW%3C/text%3E%3C/svg%3E">
+<title>with a WISH — Maison Formal｜新郎タキシードの専門メゾン（A案 デザイン提案サンプル）</title>
+<meta name="description" content="新郎タキシード専門ブランド with a WISH（松尾株式会社）フルリプレイス提案 A案「格式のメゾン」。ブラックタイの正統をまとうブランドサイトのデザインサンプルです。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --ink: #22242a;
-  --ink-soft: #5a5e66;
-  --paper: #f7f7f5;
-  --line: #d9dad6;
-  --accent: #38445c;
-  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
-  --space-section: clamp(4rem, 3rem + 4vw, 7rem);
-  --gutter: clamp(1.25rem, 4vw, 3rem);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 300;
-  font-size: var(--text-base);
-  line-height: 1.9;
-  color: var(--ink);
-  background: var(--paper);
-  -webkit-font-smoothing: antialiased;
-}
-img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; }
-.skip-link {
-  position: absolute; left: -9999px; top: 0;
-  background: var(--ink); color: #fff; padding: 0.6em 1.2em; z-index: 100;
-}
-.skip-link:focus { left: 0; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
-
-/* ---- header ---- */
-.site-head {
-  /* padding ショートハンドだと .wrap の左右余白を 0 で打ち消すため block 方向のみ指定 */
-  padding-block: calc(var(--space-section) * 0.9) calc(var(--space-section) * 0.7);
-  text-align: center;
-}
-.site-head .en {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 1.4rem;
-}
-.site-head h1 {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  font-size: clamp(1.6rem, 1.2rem + 2.4vw, 2.9rem);
-  line-height: 1.5;
-  text-wrap: balance;
-}
-.site-head .lede {
-  max-width: 640px;
-  margin: 2rem auto 0;
-  color: var(--ink-soft);
-  text-align: left;
-}
-.site-head .lede strong { font-weight: 500; color: var(--ink); }
-
-/* ---- 前提メモ ---- */
-.premise {
-  max-width: 640px;
-  margin: 0 auto var(--space-section);
-  border: 1px solid var(--line);
-  background: #fff;
-  padding: clamp(1.4rem, 1.2rem + 1vw, 2.2rem);
-}
-.premise h2 {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  font-size: 1.05rem;
-  margin-bottom: 0.8rem;
-}
-.premise ul { list-style: none; }
-.premise li {
-  padding-left: 1.2em;
-  position: relative;
-  color: var(--ink-soft);
-  font-size: 0.92rem;
-}
-.premise li::before {
-  content: "—";
-  position: absolute; left: 0;
-  color: var(--accent);
-}
-
-/* ---- proposal cards ---- */
-.proposals { display: grid; gap: clamp(2.5rem, 2rem + 3vw, 5rem); padding-bottom: var(--space-section); }
-.proposal {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  border: 1px solid var(--line);
-  background: #fff;
-  text-decoration: none;
-  overflow: hidden;
-  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
-}
-.proposal:hover, .proposal:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px -20px rgba(34, 36, 42, 0.3);
-}
-.proposal:nth-of-type(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
-.proposal:nth-of-type(even) .proposal-visual { order: 2; }
-.proposal-visual { position: relative; min-height: 300px; }
-.proposal-visual img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.proposal-visual.top img { object-position: 50% 12%; }
-.proposal-visual .letter {
-  position: absolute; top: 1.1rem; left: 1.3rem;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 2.4rem; line-height: 1;
-  color: #fff;
-  text-shadow: 0 1px 14px rgba(0,0,0,0.45);
-}
-.proposal-body { padding: clamp(1.8rem, 1.4rem + 2vw, 3.2rem); display: flex; flex-direction: column; gap: 1.1rem; }
-.proposal-body .plan-no {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  letter-spacing: 0.14em;
-  font-size: 0.9rem;
-  color: var(--accent);
-}
-.proposal-body h2 {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  font-size: clamp(1.35rem, 1.2rem + 0.9vw, 1.9rem);
-  line-height: 1.45;
-  text-wrap: balance;
-}
-.proposal-body .concept { color: var(--ink-soft); }
-.audience {
-  display: inline-block;
-  align-self: flex-start;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  padding: 0.15em 0.9em;
-}
-.features { list-style: none; font-size: 0.9rem; color: var(--ink-soft); }
-.features li { padding-left: 1.2em; position: relative; }
-.features li::before { content: "・"; position: absolute; left: 0; color: var(--accent); }
-.palette { display: flex; gap: 0.5rem; align-items: center; margin-top: auto; flex-wrap: wrap; }
-/* :not(.go) を外すと CTA の <span class="go"> まで 26px 角に潰れて文字が溢れる */
-.palette span:not(.go) {
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.12);
-  display: inline-block;
-  flex: none;
-}
-.palette .go {
-  margin-left: auto;
-  white-space: nowrap;
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  letter-spacing: 0.12em;
-  font-size: 0.95rem;
-  color: var(--ink);
-}
-.proposal:hover .go, .proposal:focus-visible .go { color: var(--accent); }
-
-/* ---- footer ---- */
-.site-foot {
-  border-top: 1px solid var(--line);
-  /* 境界線は全幅のまま、テキストだけ内側に寄せる */
-  padding: 2.5rem var(--gutter) 3.5rem;
-  text-align: center;
-  color: var(--ink-soft);
-  font-size: 0.85rem;
-  text-wrap: pretty;
-}
-.site-foot .en {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  letter-spacing: 0.16em;
-  display: block;
-  margin-bottom: 0.4rem;
-}
-
-@media (max-width: 760px) {
-  /* 1fr は minmax(auto,1fr) 相当でトラックが min-content 未満に縮まない。
-     minmax(0,1fr) にしないとカード内容がはみ出し overflow:hidden で切れる */
-  .proposal, .proposal:nth-of-type(even) { grid-template-columns: minmax(0, 1fr); }
-  .proposal:nth-of-type(even) .proposal-visual { order: 0; }
-  .proposal-visual { min-height: 220px; aspect-ratio: 16 / 9; }
-  /* 狭幅では「この案を見る →」を色見本の下に落として重なりを防ぐ */
-  .palette { row-gap: 0.9rem; }
-  .palette .go { margin-left: 0; flex-basis: 100%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .proposal { transition: none; }
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2314120F'/%3E%3Crect x='3.5' y='3.5' width='9' height='9' fill='none' stroke='%23B49B57'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style-b.css">
+<link rel="stylesheet" href="style-c.css">
+<link rel="stylesheet" href="catalog.css">
 </head>
 <body>
 <a class="skip-link" href="#main">本文へスキップ</a>
 
-<header class="site-head wrap">
-  <span class="en">with a WISH — Full Replacement Proposal</span>
-  <h1>3つの「使いやすさ」を、<br>3つのデザインでご提案します。</h1>
-  <p class="lede">
-    with a WISH の本当のお客様は、全国約3,000の<strong>取扱い衣裳店さま</strong>です。
-    「業者が使いやすいサイト」という課題への答えを3通りに解釈し、
-    それぞれ<strong>実際に操作できるサンプル</strong>として制作しました。
-    トップページの第一印象を「新郎さま向け／衣裳店さま向け／両者同席」のどこに寄せるかも、
-    3案で比較いただけます。
-  </p>
+<div class="util-bar">
+  <span class="util-note">デザイン提案サンプル — Maison Formal「格式のメゾン」</span>
+  <a href="archive/index.html">3案の比較を見る →</a>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="logo">with a WISH<span class="logo-sub">Groom's Maison — MATSUO since 1962</span></h1>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <ul>
+        <li><a href="#collection">COLLECTION</a></li>
+        <li><a href="#story">STORY</a></li>
+        <li><a href="#flow">HOW TO</a></li>
+        <li><a href="#desk">衣裳店さまへ</a></li>
+        <li><a href="#partner">お取扱いをご検討の方</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<main id="main" class="wrap">
+<main id="main">
 
-  <aside class="premise" aria-label="制作の前提">
-    <h2>制作の前提</h2>
-    <ul>
-      <li>商品データは現行サイトの実データ（全125型・品番・色・ライン・サイズ・素材）を使用</li>
-      <li>写真はすべて現行サイトの実写真</li>
-      <li>空き状況・予約・ログインは提案用のデモ動作（実システム非連携）</li>
-      <li>価格は現行方針のまま非掲載（売価は各衣裳店さまにて）</li>
+  <!-- 1. HERO -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <p class="hero-label">La Maison du Marié — depuis 1962</p>
+    <h2 id="hero-heading" class="hero-tagline">世界一幸せな花婿に<br>なっていただきたくて。</h2>
+    <div class="hero-plate reveal">
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/img/hero/slider02-sp.jpg">
+        <img src="assets/img/hero/slider02.jpg" alt="ダークタキシードの新郎とウェディングドレスの新婦の肖像" width="1400" height="591" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <p class="hero-statement">花嫁がドレスを選ぶように、花婿にも「運命の一着」を心から選んでほしい——<br class="pc-br">その想いから生まれた、新郎タキシードの専門ブランドです。</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold" href="#collection">コレクションを見る</a>
+      <a class="btn btn-quiet" href="#desk">衣裳店さまはこちら</a>
+    </div>
+  </section>
+
+  <!-- 2. 数字の額縁（シグネチャー） -->
+  <section class="section" id="numbers" aria-labelledby="numbers-heading">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ⅰ &middot; Heritage in Numbers</p>
+      <h2 id="numbers-heading">数字が語る、信頼のかたち</h2>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="section-lead">創業から60年あまり。婚礼衣裳ひと筋に磨いてきた事実だけを、額に納めて。</p>
+    </div>
+    <ul class="num-gallery" role="list">
+      <li class="num-frame reveal"><p class="num-value">1962<span class="num-unit">年創業</span></p><p class="num-desc">婚礼衣裳ひと筋、60年を超える歴史</p></li>
+      <li class="num-frame reveal"><p class="num-value">No.1<span class="num-unit">国内シェア</span></p><p class="num-desc">新郎タキシード取寄せレンタル</p></li>
+      <li class="num-frame reveal"><p class="num-value">100<span class="num-unit">型以上</span></p><p class="num-desc">デザインバリエーション</p></li>
+      <li class="num-frame reveal"><p class="num-value">63<span class="num-unit">サイズ</span></p><p class="num-desc">Y〜K体 × 3〜10号の圧倒的サイズ展開</p></li>
+      <li class="num-frame reveal"><p class="num-value">10,000<span class="num-unit">着</span></p><p class="num-desc">自社保有在庫</p></li>
+      <li class="num-frame reveal"><p class="num-value">3,000<span class="num-unit">店</span></p><p class="num-desc">全国の取扱い衣裳店ネットワーク</p></li>
     </ul>
-  </aside>
+  </section>
 
-  <div class="proposals">
+  <!-- 3. COLLECTION -->
+  <section class="section" id="collection" aria-labelledby="collection-heading">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ⅱ &middot; Collection</p>
+      <h2 id="collection-heading">コレクション</h2>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="section-lead">全125型のタキシードから、品番・色・シルエット・体型でお選びいただけます。</p>
+      <p class="section-act"><button type="button" class="btn btn-quiet btn-sm" data-desk="catalog">カタログをめくる<span class="chip-demo">全58ページ</span></button></p>
+    </div>
 
-    <a class="proposal" href="a-maison/index.html">
-      <div class="proposal-visual">
-        <img src="assets/img/hero/slider02.jpg" width="1278" height="540" alt="ダークカラーのタキシードを着た新郎と純白のドレスの花嫁" loading="eager">
-        <span class="letter" aria-hidden="true">A</span>
-      </div>
-      <div class="proposal-body">
-        <span class="plan-no">Plan A — Maison Formal</span>
-        <h2>格式のメゾン</h2>
-        <span class="audience">第一印象：新郎さまファースト</span>
-        <p class="concept">
-          使いやすさ＝「新郎に見せて誇れる、信頼で選ばれるブランドサイト」。
-          ブラックタイの正統な世界観で需要をつくり、衣裳店さまへ送客する。
-          アトリエユカ（花嫁の白）と対をなす「花婿の黒」。
-        </p>
-        <ul class="features">
-          <li>衣裳店デスクを格式あるコンシェルジュカードで1階層目に</li>
-          <li>創業64年・シェアNo.1・63サイズを「数字の額縁」で語る</li>
-          <li>生地ブランドとメイキングで「扱う理由」を伝える</li>
-        </ul>
-        <div class="palette" aria-hidden="true">
-          <span style="background:#14120f"></span>
-          <span style="background:#f5f1e8"></span>
-          <span style="background:#b49b57"></span>
-          <span class="go">この案を見る →</span>
+    <h3 class="sub-head" id="archive-heading"><span class="sub-en">The Archive</span>すべてのコレクションから探す</h3>
+    <!-- 検索ドック: 章の中で上部に吸着する。高さは常に一定（吸着で変わるのは背景と影だけ）。
+         SPでは #finder-controls をボトムシートへ移設する（DOMは1つだけ＝状態の二重管理をしない） -->
+    <div class="finder-dock" id="finder-dock">
+      <div class="finder" id="finder-panel">
+        <div class="finder-controls" id="finder-controls">
+          <div class="finder-code">
+            <label for="f-code">品番でさがす</label>
+            <input id="f-code" type="text" inputmode="numeric" autocomplete="off" placeholder="例: 20432（部分一致）" maxlength="5">
+          </div>
+          <fieldset class="finder-colors">
+            <legend>色系統でさがす</legend>
+            <div class="chip-row">
+              <button type="button" class="chip" data-color="1" aria-pressed="false"><span class="chip-dot" style="background:#1a1a1e"></span><span class="chip-label">ブラック系</span></button>
+              <button type="button" class="chip" data-color="2" aria-pressed="false"><span class="chip-dot" style="background:#f2efe8"></span><span class="chip-label">ホワイト系</span></button>
+              <button type="button" class="chip" data-color="3" aria-pressed="false"><span class="chip-dot" style="background:#c9b17a"></span><span class="chip-label">ベージュ／ゴールド系</span></button>
+              <button type="button" class="chip" data-color="4" aria-pressed="false"><span class="chip-dot" style="background:#b284a8"></span><span class="chip-label">ピンク／パープル系</span></button>
+              <button type="button" class="chip" data-color="5" aria-pressed="false"><span class="chip-dot" style="background:#2b3a5e"></span><span class="chip-label">ブルー／ネイビー系</span></button>
+              <button type="button" class="chip" data-color="6" aria-pressed="false"><span class="chip-dot" style="background:#9aa0a6"></span><span class="chip-label">グレー／シルバー系</span></button>
+              <button type="button" class="chip" data-color="7" aria-pressed="false"><span class="chip-dot" style="background:#5c6b4e"></span><span class="chip-label">グリーン／カーキ系</span></button>
+              <button type="button" class="chip" data-color="8" aria-pressed="false"><span class="chip-dot" style="background:#7a4a3a"></span><span class="chip-label">ブラウン／レッド系</span></button>
+              <button type="button" class="chip" data-color="9" aria-pressed="false"><span class="chip-dot" style="background:#d8a13c"></span><span class="chip-label">イエロー／オレンジ系</span></button>
+            </div>
+          </fieldset>
+          <div class="finder-selects">
+            <div class="finder-field">
+              <label for="f-line">ライン（シルエット）</label>
+              <select id="f-line">
+                <option value="0">すべてのライン</option>
+                <option value="1">BASIC ルーズフィット</option>
+                <option value="2">NEW REGULAR レギュラーフィット</option>
+                <option value="3">NATURAL スリムフィット</option>
+                <option value="4">MASA タイトフィット</option>
+                <option value="5">J-LINE スーパータイトフィット</option>
+              </select>
+            </div>
+            <div class="finder-field">
+              <label for="f-body">サイズ体型</label>
+              <select id="f-body">
+                <option value="">すべての体型</option>
+                <option value="Y">Y体</option><option value="A">A体</option><option value="AB">AB体</option>
+                <option value="B">B体</option><option value="O">O体</option><option value="E">E体</option><option value="K">K体</option>
+              </select>
+            </div>
+            <button type="button" class="finder-clear" id="f-clear">条件をクリア</button>
+          </div>
         </div>
       </div>
-    </a>
-
-    <a class="proposal" href="b-desk/index.html">
-      <div class="proposal-visual top">
-        <img src="assets/img/p/20423.jpg" width="642" height="900" alt="シルバーグレーのタキシードのモデル写真" loading="lazy">
-        <span class="letter" aria-hidden="true">B</span>
-      </div>
-      <div class="proposal-body">
-        <span class="plan-no">Plan B — Working Desk</span>
-        <h2>衣裳店の道具</h2>
-        <span class="audience">第一印象：衣裳店さまファースト</span>
-        <p class="concept">
-          使いやすさ＝「接客中に3クリックで目的の一着へ、そのまま予約まで」。
-          ファーストビューが業務ファインダー。日々使う道具としての機能美に全振りし、
-          レガシーな予約システムの「次の姿」を見せる。
-        </p>
-        <ul class="features">
-          <li>品番ダイレクト・即時絞り込み（ページ送りなし・全125型）</li>
-          <li>サイズ診断：3つの計測値から63サイズを自動判定→絞り込み</li>
-          <li>納期チェッカー・比較トレイ・3ステップ予約ウィザード</li>
-        </ul>
-        <div class="palette" aria-hidden="true">
-          <span style="background:#f6f6f3"></span>
-          <span style="background:#22252a"></span>
-          <span style="background:#24406e"></span>
-          <span class="go">この案を見る →</span>
+      <p class="finder-status" id="finder-status" role="status" aria-live="polite"></p>
+    </div>
+    <!-- サイズ診断は開閉で高さが変わる。吸着バーの中に置くとレイアウトが動いて
+         スクロールが暴れるため、バーの外（通常フロー）に出す -->
+    <div id="size-aid-home">
+      <details class="size-aid" id="size-aid">
+        <summary>サイズ簡易診断 — 身長・胸囲・ウエストから体型を判定</summary>
+        <div class="size-aid-body">
+          <div class="size-aid-fields">
+            <div class="finder-field"><label for="sz-h">身長 (cm)</label><input id="sz-h" type="number" inputmode="numeric" min="100" max="230" autocomplete="off"></div>
+            <div class="finder-field"><label for="sz-c">胸囲 (cm)</label><input id="sz-c" type="number" inputmode="numeric" min="50" max="180" autocomplete="off"></div>
+            <div class="finder-field"><label for="sz-w">ウエスト (cm)</label><input id="sz-w" type="number" inputmode="numeric" min="40" max="180" autocomplete="off"></div>
+            <button type="button" class="btn btn-quiet btn-sm" id="sz-run">判定する</button>
+          </div>
+          <p class="size-aid-result" id="sz-result" role="status"></p>
         </div>
-      </div>
-    </a>
+      </details>
+    </div>
+    <div class="p-grid" id="product-grid"></div>
+    <div class="no-results" id="no-results" hidden>
+      <p>ご指定の条件に該当するタキシードがありません。</p>
+      <button type="button" class="btn btn-quiet btn-sm" id="nr-clear">条件をクリアして全型を見る</button>
+    </div>
+    <noscript><p class="finder-status">検索機能の閲覧には JavaScript が必要です。上の厳選コレクション13型はそのままご覧いただけます。</p></noscript>
+  </section>
 
-    <a class="proposal" href="c-salon/index.html">
-      <div class="proposal-visual top">
-        <img src="assets/img/p/20425.jpg" width="600" height="901" alt="ベージュのタキシードで壁にもたれるモデルのエディトリアル写真" loading="lazy">
-        <span class="letter" aria-hidden="true">C</span>
+  <!-- 4. STORY -->
+  <section class="section" id="story" aria-labelledby="story-heading">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ⅲ &middot; Story</p>
+      <h2 id="story-heading">メゾンの物語</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+    <div class="story-row reveal">
+      <figure class="story-figure">
+        <span class="p-frame"><img class="mono" src="assets/img/about/making01.jpg" alt="アトリエの裁断道具とCONCEPTの文字（モノクロ）" width="1400" height="945" loading="lazy" decoding="async"></span>
+        <figcaption>大阪・箕面のアトリエにて</figcaption>
+      </figure>
+      <div class="story-text">
+        <h3><span class="sub-en">Atelier — Made in Japan</span>一着ずつ、職人の手から。</h3>
+        <p>1962年の創業以来、with a WISH のタキシードはすべて日本の自社アトリエで生まれます。裁断、縫製、プレス——ひとつひとつの工程に職人の手が入り、Y体からK体まで63サイズ、100型を超えるコレクションが仕立てられていきます。</p>
+        <p>花婿の一日は、一生に一度。だからこそ袖を通した瞬間の佇まいまで、私たちは作り込みます。</p>
       </div>
-      <div class="proposal-body">
-        <span class="plan-no">Plan C — Digital Salon</span>
-        <h2>接客ルックブック</h2>
-        <span class="audience">第一印象：スタッフとお客様の両者同席</span>
-        <p class="concept">
-          使いやすさ＝「店頭で新郎に見せる、最強の接客ツール」。
-          サイトそのものをラグジュアリー誌のようなデジタルカタログにして、
-          iPadを挟んだ接客の会話を設計する。
-        </p>
-        <ul class="features">
-          <li>「この一着を見せる」プレゼンモード（フルスクリーン・2着比較）</li>
-          <li>お気に入りがそのまま品番リスト＝取寄せメモになる</li>
-          <li>カラードレス×タキシードのペアリング企画（アトリエユカ連携）</li>
-        </ul>
-        <div class="palette" aria-hidden="true">
-          <span style="background:#faf7f2"></span>
-          <span style="background:#2a2724"></span>
-          <span style="background:#6e2b35"></span>
-          <span class="go">この案を見る →</span>
+    </div>
+    <div class="story-row is-reverse reveal">
+      <figure class="story-figure">
+        <span class="p-frame"><img class="mono" src="assets/img/about/making02.jpg" alt="アトリエの縫製道具と生地（モノクロ）" width="1400" height="945" loading="lazy" decoding="async"></span>
+        <figcaption>DORMEUIL — depuis 1842</figcaption>
+      </figure>
+      <div class="story-text">
+        <h3><span class="sub-en">The Fabric — Dormeuil</span>ドーメル、1842年からの生地。</h3>
+        <p>1842年よりフランス・イギリスを中心に続く高級生地ブランドのドーメル社。独自開発による革新的な服地素材が世界80ヵ国以上のテーラー、名士賓客に圧倒的な支持を受け続けている。その知名度と信頼感は、創業170年を超えた今なお確固たる地位を築いています。</p>
+        <p>with a WISH はこのドーメルの服地を、ロイヤルオリーヴやミステリアスブルーをはじめとする厳選コレクションにまといました。</p>
+        <p class="story-codes">ドーメルをまとう型 — No. 20432 ／ 20422 ／ 20417 ／ 20414 ／ 20410 ／ 20409</p>
+      </div>
+    </div>
+    <ul class="story-strip reveal" role="list">
+      <li><span class="p-frame"><img class="mono" src="assets/img/about/atelier01.jpg" alt="アトリエ風景 1（モノクロ）" width="1400" height="512" loading="lazy" decoding="async"></span></li>
+      <li><span class="p-frame"><img class="mono" src="assets/img/about/atelier02.jpg" alt="アトリエ風景 2（モノクロ）" width="1400" height="512" loading="lazy" decoding="async"></span></li>
+      <li><span class="p-frame"><img class="mono" src="assets/img/about/atelier03.jpg" alt="アトリエ風景 3（モノクロ）" width="1400" height="512" loading="lazy" decoding="async"></span></li>
+    </ul>
+  </section>
+
+  <!-- 5. 衣裳店デスク -->
+  <section class="section section-raised" id="desk" aria-labelledby="desk-heading">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ⅳ &middot; Concierge</p>
+      <h2 id="desk-heading">衣裳店デスク</h2>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="section-lead">お取扱い衣裳店さまのための執務室。空き状況・ご予約・カタログ・販促素材を、ログインなしでそのままお使いいただけます。</p>
+    </div>
+    <ul class="desk-cards" role="list">
+      <li><button type="button" class="desk-card reveal" data-desk="avail">
+        <span class="chip-demo">デモ</span><span class="desk-no">Ⅰ</span>
+        <span class="desk-title">空き状況チェック</span>
+        <span class="desk-desc">ご希望の商品・お日にちの空き状況を24時間確認できます。</span>
+      </button></li>
+      <li><button type="button" class="desk-card reveal" data-desk="reserve">
+        <span class="chip-demo">デモ</span><span class="desk-no">Ⅱ</span>
+        <span class="desk-title">WEB予約登録</span>
+        <span class="desk-desc">出荷前日24時まで、その場で予約完了。確認書はメールでお届け。</span>
+      </button></li>
+      <li><button type="button" class="desk-card reveal" data-desk="catalog">
+        <span class="chip-demo">デモ</span><span class="desk-no">Ⅲ</span>
+        <span class="desk-title">デジタルカタログ</span>
+        <span class="desk-desc">冊子カタログをそのままブラウザで。スマートフォンはスワイプ、PCは見開きでめくれます。</span>
+      </button></li>
+      <li><button type="button" class="desk-card reveal" data-desk="assets">
+        <span class="chip-demo">デモ</span><span class="desk-no">Ⅳ</span>
+        <span class="desk-title">販促素材ダウンロード</span>
+        <span class="desk-desc">商品写真・ロゴ・POPデータを自店のサイトやSNSでご利用いただけます。</span>
+      </button></li>
+    </ul>
+    <div class="desk-lower">
+      <div class="checker reveal">
+        <h3><span class="sub-en">Schedule</span>納期チェッカー</h3>
+        <p class="checker-lead">挙式・ご使用日から、予約締切とお届け日を逆算します。</p>
+        <div class="checker-form">
+          <div class="finder-field">
+            <label for="sched-date">ご使用日</label>
+            <input type="date" id="sched-date" autocomplete="off">
+          </div>
+          <button type="button" class="btn btn-gold btn-sm" id="sched-run">逆算する</button>
         </div>
+        <div class="checker-result" id="sched-result" role="status" aria-live="polite"></div>
       </div>
-    </a>
+      <div class="desk-contact reveal">
+        <h3><span class="sub-en">Contact</span>ご連絡先・締切</h3>
+        <p class="contact-tel"><span class="contact-label">お電話</span><a href="tel:0727291642">072-729-1642</a></p>
+        <p class="contact-line">受付時間 — 月〜金 9:45〜16:00</p>
+        <p class="contact-line">FAX — 0120-127-823（24時間）</p>
+        <p class="contact-deadline">出荷前日 24:00 まで予約受付<span>（翌日が平日の場合）</span></p>
+        <p class="contact-note">お電話・FAXでのご注文も従来どおり承ります。</p>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <!-- 6. ご利用の流れ -->
+  <section class="section" id="flow" aria-labelledby="flow-heading">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ⅴ &middot; How to</p>
+      <h2 id="flow-heading">ご利用の流れ</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+    <div class="tabs reveal" role="tablist" aria-label="ご利用の流れの対象切り替え">
+      <button type="button" role="tab" id="tab-groom" aria-controls="panel-groom" aria-selected="true">新郎さまへ</button>
+      <button type="button" role="tab" id="tab-vendor" aria-controls="panel-vendor" aria-selected="false" tabindex="-1">衣裳店さまへ</button>
+    </div>
+    <ol class="flow-list reveal" id="panel-groom" role="tabpanel" aria-labelledby="tab-groom">
+      <li><span class="flow-no">01</span><h3>サイズを知る</h3><p>身長・胸まわり・ウエストの3つの計測で、63サイズからあなたのサイズがわかります。</p></li>
+      <li><span class="flow-no">02</span><h3>デザインを選ぶ</h3><p>100型以上のコレクションから、サイズに合うタキシードを検索。</p></li>
+      <li><span class="flow-no">03</span><h3>衣裳店で試着予約</h3><p>お近くの取扱い衣裳店・式場提携の衣裳室で試着をご予約ください。全国約3,000店。</p></li>
+      <li><span class="flow-no">04</span><h3>試着する</h3><p>取寄せた実物をご試着。襟のないお洋服でご来店いただくとスムーズです。</p></li>
+      <li><span class="flow-no">05</span><h3>レンタル決定</h3><p>料金・レンタル期間は衣裳店にてご相談のうえ、ご成約ください。</p></li>
+    </ol>
+    <ol class="flow-list reveal" id="panel-vendor" role="tabpanel" aria-labelledby="tab-vendor" hidden>
+      <li><span class="flow-no">01</span><h3>空き状況を確認</h3><p>WEB予約システムで24時間、商品の空き状況をチェック。お電話でも承ります。</p></li>
+      <li><span class="flow-no">02</span><h3>予約を登録</h3><p>出荷前日24時まで予約可能（翌日が平日の場合）。WEB・電話・FAXで受付。</p></li>
+      <li><span class="flow-no">03</span><h3>発注確認</h3><p>ご予約内容をメールとFAXでお知らせ。内容をご確認ください。</p></li>
+      <li><span class="flow-no">04</span><h3>受取・ご試着</h3><p>ご指定の店舗へ配送。お客様のご試着・ご成約にお役立てください。</p></li>
+      <li><span class="flow-no">05</span><h3>ご返送</h3><p>ご利用後は同梱の伝票でご返送ください。クリーニング不要です。</p></li>
+    </ol>
+  </section>
+
+  <!-- 7. お取扱いをご検討の衣裳店さまへ -->
+  <section class="section section-raised" id="partner" aria-labelledby="partner-heading">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ⅵ &middot; Partnership</p>
+      <h2 id="partner-heading">お取扱いをご検討の衣裳店さまへ</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+    <ul class="merit-list" role="list">
+      <li class="merit reveal"><span class="merit-no">01</span><h3>在庫リスクゼロ</h3><p>自社で在庫を持たずに100型・63サイズの品揃えをお店のラインナップに。1着からの取寄せでご利用いただけます。</p></li>
+      <li class="merit reveal"><span class="merit-no">02</span><h3>国内シェアNo.1の安心</h3><p>創業1962年・婚礼衣裳ひと筋。全国約3,000店の衣裳店さまとお取引しています。</p></li>
+      <li class="merit reveal"><span class="merit-no">03</span><h3>接客がそのまま売上に</h3><p>新郎さまはWEBで下見済み。サイズ×デザインの提案ツールで、試着から成約までを短縮します。</p></li>
+    </ul>
+    <h3 class="sub-head reveal"><span class="sub-en">Questions</span>よくあるご質問</h3>
+    <div class="faq reveal">
+      <details><summary>取扱いを始めるには何が必要ですか？</summary><p>下記フォームよりお申込みください。審査ののち、専用IDを発行いたします。初期費用・年会費は不要です。（デモ文言）</p></details>
+      <details><summary>予約はいつまでできますか？</summary><p>出荷前日の24時まで承ります（翌日が平日の場合）。お急ぎの場合はお電話でご相談ください。</p></details>
+      <details><summary>汚損・破損があった場合は？</summary><p>通常のご利用範囲の汚れはクリーニング不要でそのままご返送ください。著しい汚損・破損は個別にご相談させていただきます。（デモ文言）</p></details>
+      <details><summary>試着用の在庫を店舗に置けますか？</summary><p>サンプルの取扱いについては担当までご相談ください。デジタルカタログとサイズ表で、店頭在庫なしでもご提案いただけます。（デモ文言）</p></details>
+      <details><summary>新作の情報はどこで確認できますか？</summary><p>会員向けメールとデジタルカタログでいち早くお知らせします。</p></details>
+    </div>
+    <h3 class="sub-head reveal"><span class="sub-en">Invitation</span>お問い合わせ</h3>
+    <form class="invite reveal" id="contact-form" novalidate>
+      <p class="invite-en" aria-hidden="true">Invitation</p>
+      <p class="invite-lead">お取引のご相談・新規お取扱いのお申込みは、こちらからお寄せください。</p>
+      <div class="invite-field">
+        <label for="c-type">お客様種別 <span class="req">必須</span></label>
+        <select id="c-type" name="type" required>
+          <option value="">選択してください</option>
+          <option value="existing">既存のお取引店</option>
+          <option value="new">新規お取扱いをご希望</option>
+        </select>
+        <p class="field-error" id="err-type" hidden>お客様種別を選択してください。</p>
+      </div>
+      <div class="invite-field">
+        <label for="c-company">貴社名 <span class="req">必須</span></label>
+        <input type="text" id="c-company" name="company" autocomplete="organization" required>
+        <p class="field-error" id="err-company" hidden>貴社名をご入力ください。</p>
+      </div>
+      <div class="invite-field">
+        <label for="c-name">ご担当者さまのお名前 <span class="req">必須</span></label>
+        <input type="text" id="c-name" name="name" autocomplete="name" required>
+        <p class="field-error" id="err-name" hidden>お名前をご入力ください。</p>
+      </div>
+      <div class="invite-field">
+        <label for="c-email">メールアドレス <span class="req">必須</span></label>
+        <input type="email" id="c-email" name="email" autocomplete="email" inputmode="email" required>
+        <p class="field-error" id="err-email" hidden>正しいメールアドレスをご入力ください。</p>
+      </div>
+      <div class="invite-field">
+        <label for="c-body">お問い合わせ内容 <span class="req">必須</span></label>
+        <textarea id="c-body" name="body" rows="5" required></textarea>
+        <p class="field-error" id="err-body" hidden>お問い合わせ内容をご入力ください。</p>
+      </div>
+      <button type="submit" class="btn btn-ink">送信する（デモ）</button>
+      <p class="invite-note">本フォームは提案用のデモです。実際の送信は行われません。</p>
+      <div class="invite-done" id="invite-done" hidden role="status">
+        <p class="invite-en" aria-hidden="true">Merci</p>
+        <p class="invite-done-title">お問い合わせを承りました。</p>
+        <p>担当より2営業日以内にご連絡差し上げます。<br>（デモ表示のため、実際の送信は行われていません）</p>
+      </div>
+    </form>
+  </section>
+
+  <!-- 8. タイアップ + 会社概要 -->
+  <section class="section" id="maison" aria-labelledby="maison-heading">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ⅶ &middot; Maison</p>
+      <h2 id="maison-heading">衣裳タイアップ・会社概要</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+    <div class="maison-grid reveal">
+      <div class="tieup">
+        <h3><span class="sub-en">Media Tie-up</span>衣裳タイアップ</h3>
+        <p>TV・雑誌・Web媒体のスタイリスト、メディアご担当者さまへ衣裳のお貸出しを承ります。</p>
+        <ul class="tieup-list">
+          <li>クレジット掲載（Web媒体はリンク付き）</li>
+          <li>事前審査あり・媒体企画書のご提出</li>
+          <li>OA・発売後2週間以内のご報告</li>
+        </ul>
+        <p class="tieup-flow">登録 → 注文 → 確認 → 配送 → 報告 → 返却</p>
+        <p class="tieup-contact">TEL 072-729-1642（月〜金 9:45〜16:00）<br>mbs-web@mbs-netservice.com</p>
+      </div>
+      <div class="company">
+        <h3><span class="sub-en">Company</span>会社概要</h3>
+        <dl class="company-dl">
+          <div><dt>社名</dt><dd>松尾株式会社</dd></div>
+          <div><dt>創業</dt><dd>1962年1月16日</dd></div>
+          <div><dt>法人設立</dt><dd>2015年2月9日</dd></div>
+          <div><dt>資本金</dt><dd>900万円</dd></div>
+          <div><dt>代表</dt><dd>代表取締役社長 松尾 祐佳</dd></div>
+          <div><dt>拠点</dt><dd>マツオブライダルサービス（大阪府箕面市）／Tuxedo-Studio × AtelierYuka（大阪府箕面市）／大阪商品センター（大阪府箕面市）／AtelierYuka 銀座（東京都中央区銀座）</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer class="site-foot">
-  <span class="en">with a WISH — MATSUO CO., LTD.</span>
-  ご選定後、この方向性をベースに全ページの設計・実装を深掘りします。
+<footer class="site-footer">
+  <div class="family-bar">
+    <p class="family-en">MATSUO Bridal Family</p>
+    <p class="family-line">花嫁の一着は <a href="https://atelieryuka.com/" target="_blank" rel="noopener">Atelier Yuka</a>　—　花婿の一着は with a WISH</p>
+  </div>
+  <p class="footer-note">一般のお客様への直接レンタルは行っておりません。お近くのお取扱い衣裳店、または Atelier Yuka オンラインショップをご利用ください。</p>
+  <p class="footer-copy">&copy; 2026 松尾株式会社 / with a WISH — 本ページはフルリプレイス提案用のデザインサンプルです。</p>
 </footer>
 
+<!-- 商品詳細 -->
+<dialog id="product-dialog" aria-labelledby="pd-title">
+  <button type="button" class="dialog-close" data-close aria-label="閉じる">&times;</button>
+  <div class="dialog-inner">
+    <div class="pd-grid">
+      <div class="pd-visual">
+        <span class="p-frame pd-main"><img id="pd-img" src="" alt="" width="642" height="900" decoding="async"></span>
+        <div class="pd-thumbs" id="pd-thumbs" role="group" aria-label="商品写真の切り替え"></div>
+      </div>
+      <div class="pd-info">
+        <p class="pd-type" id="pd-type"></p>
+        <h2 id="pd-title"></h2>
+        <p class="pd-code"><span id="pd-code"></span>
+          <button type="button" class="btn btn-quiet btn-sm" id="pd-copy">品番をコピー</button>
+          <button type="button" class="btn btn-quiet btn-sm pd-cmp" id="pd-cmp" aria-pressed="false">比較に追加</button>
+          <span class="pd-copy-done" id="pd-copy-done" role="status" aria-live="polite"></span>
+        </p>
+        <dl class="pd-dl" id="pd-dl"></dl>
+        <div class="pd-desc" id="pd-desc"></div>
+        <blockquote class="pd-brand" id="pd-brand" hidden></blockquote>
+        <p class="pd-notice">この一着は、お近くのお取扱い衣裳店でご試着いただけます。品番をお控えのうえ、試着をご予約ください。一般のお客様への直接レンタルは行っておりません。</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- 衣裳店デスク: 空き状況チェック（デモ） -->
+<dialog id="avail-dialog" aria-labelledby="avail-title">
+  <button type="button" class="dialog-close" data-close aria-label="閉じる">&times;</button>
+  <div class="dialog-inner">
+    <p class="eyebrow">Concierge Ⅰ</p>
+    <h2 id="avail-title">空き状況チェック<span class="chip-demo">デモ</span></h2>
+    <div class="desk-tool">
+      <div class="finder-field desk-tool-field">
+        <label for="av-code">品番</label>
+        <input id="av-code" type="text" inputmode="numeric" autocomplete="off" placeholder="例: 20432" maxlength="5">
+      </div>
+      <p class="desk-tool-note" id="av-name"></p>
+      <table class="cal" id="av-cal">
+        <caption class="cal-cap">今後4週間の空き状況</caption>
+        <thead><tr><th scope="col">月</th><th scope="col">火</th><th scope="col">水</th><th scope="col">木</th><th scope="col">金</th><th scope="col">土</th><th scope="col">日</th></tr></thead>
+        <tbody id="av-body"></tbody>
+      </table>
+      <p class="cal-legend"><span class="st-ok">○</span> 空きあり　<span class="st-few">△</span> 残りわずか　<span class="st-no">×</span> 貸出不可</p>
+      <p class="desk-tool-note">※提案用のデモ表示です。実在の在庫状況ではありません。</p>
+    </div>
+  </div>
+</dialog>
+
+<!-- 衣裳店デスク: WEB予約登録（デモ・3ステップ） -->
+<dialog id="reserve-dialog" aria-labelledby="reserve-title">
+  <button type="button" class="dialog-close" data-close aria-label="閉じる">&times;</button>
+  <div class="dialog-inner dialog-narrow">
+    <p class="eyebrow">Concierge Ⅱ</p>
+    <h2 id="reserve-title">WEB予約登録<span class="chip-demo">デモ</span></h2>
+    <ol class="wiz-steps" id="wiz-steps" role="list">
+      <li aria-current="step">ご使用日</li><li>店舗情報</li><li>確認</li>
+    </ol>
+    <div class="wiz-pane" data-wp="1">
+      <div class="invite-field">
+        <label for="rv-code">品番</label>
+        <input type="text" id="rv-code" inputmode="numeric" autocomplete="off" placeholder="例: 20432" maxlength="5">
+      </div>
+      <div class="invite-field">
+        <label for="rv-date">ご使用日</label>
+        <input type="date" id="rv-date">
+      </div>
+      <p class="field-error" id="rv-err1" hidden></p>
+      <dl class="sched-dl" id="rv-sched" hidden></dl>
+      <div class="wiz-nav"><button type="button" class="btn btn-gold btn-sm" data-wnext="2">次へ：店舗情報</button></div>
+    </div>
+    <div class="wiz-pane" data-wp="2" hidden>
+      <div class="invite-field"><label for="rv-shop">店舗名</label><input type="text" id="rv-shop" autocomplete="organization"></div>
+      <div class="invite-field"><label for="rv-staff">ご担当者</label><input type="text" id="rv-staff" autocomplete="name"></div>
+      <div class="invite-field"><label for="rv-tel">お電話番号</label><input type="tel" id="rv-tel" autocomplete="tel" inputmode="tel" placeholder="072-000-0000"></div>
+      <p class="field-error" id="rv-err2" hidden></p>
+      <div class="wiz-nav"><button type="button" class="btn btn-quiet btn-sm" data-wback="1">戻る</button><button type="button" class="btn btn-gold btn-sm" data-wnext="3">次へ：確認</button></div>
+    </div>
+    <div class="wiz-pane" data-wp="3" hidden>
+      <dl class="pd-dl" id="rv-confirm"></dl>
+      <div class="wiz-nav"><button type="button" class="btn btn-quiet btn-sm" data-wback="2">戻る</button><button type="button" class="btn btn-gold btn-sm" id="rv-send">予約を送信（デモ）</button></div>
+    </div>
+    <div class="wiz-done" id="rv-done" hidden tabindex="-1">
+      <p class="done-title">ご予約を承りました。</p>
+      <p class="desk-tool-note" id="rv-done-t"></p>
+      <p class="demo-note">提案用のデモです。実際の予約システムへの登録は行われていません。</p>
+    </div>
+  </div>
+</dialog>
+
+<!-- 衣裳店デスク: 販促素材ダウンロード（デモ） -->
+<dialog id="assets-dialog" aria-labelledby="assets-title">
+  <button type="button" class="dialog-close" data-close aria-label="閉じる">&times;</button>
+  <div class="dialog-inner dialog-narrow">
+    <p class="eyebrow">Concierge Ⅳ</p>
+    <h2 id="assets-title">販促素材ダウンロード<span class="chip-demo">デモ</span></h2>
+    <p class="dialog-lead">商品写真・ロゴ・POPデータを、自店のサイトやSNSでご利用いただけます。</p>
+    <ul class="asset-list" role="list">
+      <li><span class="asset-name">商品写真一式<span class="asset-meta">JPG / 全125型 / 約1.2GB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="商品写真一式">取得</button></li>
+      <li><span class="asset-name">ブランドロゴ<span class="asset-meta">AI・PNG / 約8MB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="ブランドロゴ">取得</button></li>
+      <li><span class="asset-name">店頭POPテンプレート<span class="asset-meta">PDF / A4・B2 / 約24MB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="店頭POPテンプレート">取得</button></li>
+      <li><span class="asset-name">SNS用バナー<span class="asset-meta">PNG / 正方形・ストーリー / 約36MB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="SNS用バナー">取得</button></li>
+    </ul>
+    <p class="desk-tool-note" id="asset-done" role="status"></p>
+    <p class="demo-note">提案用のデモです。実ファイルの配信は行われていません。</p>
+  </div>
+</dialog>
+
+<!-- 衣裳店デスク: デジタルカタログ（冊子ビューア） -->
+<dialog id="catalog-dialog" aria-labelledby="cat-title">
+  <div class="cat-shell">
+    <div class="cat-bar">
+      <p class="cat-title" id="cat-title">デジタルカタログ<span class="chip-demo">デモ</span></p>
+      <div class="cat-acts">
+        <button type="button" class="cat-btn" id="cat-index" aria-expanded="false" aria-controls="cat-thumbs">目次</button>
+        <a class="cat-btn" href="assets/catalog/atelieryuka-catalog-2026.pdf" target="_blank" rel="noopener">PDFで開く<span class="cat-meta">58P / 25MB</span></a>
+        <button type="button" class="cat-x" data-close aria-label="カタログを閉じる">&times;</button>
+      </div>
+    </div>
+
+    <div class="cat-stage">
+      <button type="button" class="cat-nav cat-prev" id="cat-prev" aria-label="前のページ"><span aria-hidden="true">&lsaquo;</span></button>
+      <!-- ページはJSで流し込む。SPは1ページ＝1スナップ、PCは見開き＝1スナップ（CSSのみで切替） -->
+      <div class="cat-track" id="cat-track" tabindex="0" role="group" aria-label="カタログのページ送り（左右キー・スワイプで操作）"></div>
+      <button type="button" class="cat-nav cat-next" id="cat-next" aria-label="次のページ"><span aria-hidden="true">&rsaquo;</span></button>
+    </div>
+
+    <div class="cat-thumbs" id="cat-thumbs" hidden></div>
+
+    <div class="cat-foot">
+      <p class="cat-count" id="cat-count" role="status" aria-live="polite"></p>
+      <label class="cat-slider">
+        <span class="vh">ページ位置</span>
+        <input class="cat-range" type="range" id="cat-range" min="1" max="58" step="1" value="1">
+      </label>
+      <p class="cat-note">本デモには Atelier Yuka 2026 カタログを仮置きしています。公開時は with a WISH のカタログに差し替えます。</p>
+    </div>
+  </div>
+</dialog>
+
+<!-- 比較トレイ: 新郎さまは候補比較、衣裳店さまはご提案候補づくりに使う -->
+<div class="tray" id="tray" hidden>
+  <p class="tray-lab">比較する一着<span class="tray-n" id="tray-n">0</span></p>
+  <ul class="tray-items" id="tray-items" role="list"></ul>
+  <div class="tray-acts">
+    <button type="button" class="btn btn-gold btn-sm" id="tray-open" disabled>並べて見る</button>
+    <button type="button" class="tray-clear" id="tray-clear">空にする</button>
+  </div>
+</div>
+
+<button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ戻る" hidden>
+  <span aria-hidden="true">↑</span>
+</button>
+
+<!-- SP用 絞り込み FAB ＋ ボトムシート -->
+<button type="button" class="fab" id="fab" aria-expanded="false" aria-controls="filter-sheet" hidden>
+  絞り込み<span class="fab-badge" id="fab-badge" hidden>0</span>
+</button>
+<div class="sheet-back" id="sheet-back" hidden></div>
+<div class="sheet" id="filter-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet-hd">
+    <h2 id="sheet-title">絞り込み</h2>
+    <button type="button" class="sheet-x" id="sheet-x" aria-label="絞り込みを閉じる">×</button>
+  </div>
+  <div class="sheet-bd" id="sheet-body"></div>
+  <div class="sheet-ft">
+    <button type="button" class="btn btn-gold" id="sheet-apply"><span id="sheet-count">125</span>型を見る</button>
+  </div>
+</div>
+
+<!-- 比較ビュー -->
+<dialog id="compare-dialog" aria-labelledby="cmp-title">
+  <button type="button" class="dialog-close" aria-label="閉じる">×</button>
+  <div class="dialog-inner">
+    <p class="pd-type">Comparison</p>
+    <h2 id="cmp-title">並べて見る</h2>
+    <div class="cmp-wrap"><div class="cmp-grid" id="cmp-grid"></div></div>
+  </div>
+</dialog>
+
+<script src="assets/data.js"></script>
+<script src="catalog.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

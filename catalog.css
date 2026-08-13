@@ -1,0 +1,217 @@
+/* =========================================================
+   with a WISH — Maison Formal
+   catalog.css: デジタルカタログ（冊子ビューア）
+   SP = 1ページずつスワイプ / PC = 見開きで矢印・キー送り
+   ページ画像は assets/catalog/pages/NN.webp（1200×1683）
+   ========================================================= */
+
+/* 冊子は面積が命。他ダイアログの 940px 上限を外して全画面で使う。
+   100vw/100dvh ではなく inset:0 で埋めるのは、スクロールバー幅ぶんの
+   はみ出しとアドレスバー伸縮の影響を受けないため */
+#catalog-dialog {
+  position: fixed;
+  inset: 0;
+  width: auto; height: auto;
+  max-width: none; max-height: none;
+  margin: 0;
+  border: 0;
+  background: var(--ink-deep);
+}
+
+.cat-shell {
+  display: grid;
+  /* 明示しないと暗黙の列が中身（58ページぶんの min-content）で膨らむ */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  height: 100%;
+}
+
+/* ---------- 上部バー ---------- */
+.cat-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1em;
+  padding: 0.7em clamp(12px, 3vw, 24px);
+  border-bottom: 1px solid var(--gold-line);
+  background: var(--ink);
+}
+.cat-title {
+  font-family: var(--serif-ja);
+  font-size: var(--fs-lg); letter-spacing: var(--ls-wide);
+}
+.cat-title .chip-demo { margin-left: 0.8em; vertical-align: 0.15em; }
+.cat-acts { display: flex; align-items: center; gap: 0.5em; }
+.cat-btn {
+  display: inline-flex; align-items: baseline; gap: 0.6em;
+  white-space: nowrap;
+  background: none; border: 1px solid var(--gold-line);
+  color: var(--gold-text); text-decoration: none;
+  font-family: var(--sans);
+  font-size: var(--fs-xs); font-weight: var(--wt-small); letter-spacing: var(--ls-label);
+  padding: 0.6em 1em; cursor: pointer;
+  transition: border-color var(--duration-fast, 150ms) ease, color var(--duration-fast, 150ms) ease;
+}
+.cat-btn:hover { border-color: var(--gold); color: var(--gold-bright); }
+.cat-btn[aria-expanded="true"] { background: var(--gold-glow); border-color: var(--gold); }
+.cat-meta {
+  font-size: var(--fs-2xs); letter-spacing: var(--ls-tight);
+  color: var(--ivory-faint);
+  font-variant-numeric: tabular-nums;
+}
+.cat-x {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: var(--ink-raised);
+  border: 1px solid var(--line-strong);
+  color: var(--ivory);
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+}
+.cat-x:hover { border-color: var(--gold); color: var(--gold-text); }
+
+/* ---------- 誌面 ---------- */
+.cat-stage { position: relative; min-width: 0; min-height: 0; }
+
+.cat-track {
+  display: flex;
+  height: 100%;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  /* 冊子の外まで慣性が抜けると背後のページが動く */
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.cat-track::-webkit-scrollbar { display: none; }
+.cat-track:focus-visible { outline: 2px solid var(--gold); outline-offset: -4px; }
+
+/* トラックには padding を置かない。置くと 1画面 ≠ clientWidth になり、
+   scrollBy(clientWidth) の送り量とスナップ位置がずれる。逃げは各ページ側で取る */
+/* grid ではなく flex。grid の行は auto で高さが不定になり、
+   子の max-height:100% が効かず誌面が画面からはみ出す */
+.cat-page {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex; align-items: center; justify-content: center;
+  min-width: 0;
+  padding: clamp(10px, 2.5vw, 28px);
+}
+.cat-page img {
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  background: var(--paper);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 送りボタン（PCのみ。SPはスワイプ） ---------- */
+.cat-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 52px; height: 76px;
+  display: none; place-items: center;
+  background: rgba(20, 18, 15, 0.82);
+  border: 1px solid var(--gold-line);
+  color: var(--gold-text);
+  font-size: 1.9rem; line-height: 1; cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.cat-nav:hover { background: var(--ink); border-color: var(--gold); }
+.cat-nav[disabled] { opacity: 0.28; cursor: default; }
+.cat-nav[disabled]:hover { background: rgba(20, 18, 15, 0.82); border-color: var(--gold-line); }
+.cat-prev { left: clamp(6px, 1.5vw, 16px); }
+.cat-next { right: clamp(6px, 1.5vw, 16px); }
+
+/* ---------- 目次（サムネイル） ---------- */
+.cat-thumbs {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px;
+  max-height: 38vh; overflow-y: auto;
+  padding: 14px clamp(12px, 3vw, 24px);
+  border-top: 1px solid var(--line);
+  background: var(--ink);
+}
+.cat-thumb {
+  background: none; border: 1px solid transparent; padding: 0; cursor: pointer;
+  display: grid; gap: 4px; justify-items: center;
+}
+.cat-thumb img { width: 100%; height: auto; background: var(--paper); }
+.cat-thumb span {
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  color: var(--ivory-faint);
+  font-variant-numeric: tabular-nums;
+}
+.cat-thumb:hover img { outline: 1px solid var(--gold); }
+.cat-thumb[aria-current="true"] img { outline: 2px solid var(--gold); }
+.cat-thumb[aria-current="true"] span { color: var(--gold-text); }
+
+/* ---------- 下部バー ---------- */
+.cat-foot {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5em clamp(12px, 3vw, 24px);
+  padding: 0.7em clamp(12px, 3vw, 24px) 0.9em;
+  border-top: 1px solid var(--gold-line);
+  background: var(--ink);
+}
+.cat-count {
+  font-size: var(--fs-sm); font-weight: var(--wt-small);
+  letter-spacing: var(--ls-wide);
+  color: var(--ivory-dim);
+  font-variant-numeric: tabular-nums;
+}
+.cat-slider { display: block; min-width: 0; }
+.cat-range {
+  width: 100%; height: 28px;
+  background: none; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+}
+.cat-range::-webkit-slider-runnable-track {
+  height: 1px; background: var(--line-strong);
+}
+.cat-range::-moz-range-track { height: 1px; background: var(--line-strong); }
+.cat-range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; margin-top: -7px;
+  background: var(--gold); border: 0; border-radius: 50%;
+}
+.cat-range::-moz-range-thumb {
+  width: 14px; height: 14px;
+  background: var(--gold); border: 0; border-radius: 50%;
+}
+.cat-range:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.cat-note {
+  grid-column: 1 / -1;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  color: var(--ivory-faint);
+}
+
+/* ---------- PC: 見開き ---------- */
+@media (min-width: 861px) {
+  .cat-nav { display: grid; }
+  /* 2ページで1画面。スナップは奇数ページ（＝見開きの左）にだけ効かせる */
+  .cat-page { flex-basis: 50%; scroll-snap-align: none; }
+  /* 綴じ側を中央に寄せて冊子に見せ、外側は矢印ぶんの逃げを取る */
+  .cat-page:nth-child(odd) {
+    scroll-snap-align: start;
+    justify-content: flex-end;
+    padding-left: 66px; padding-right: 2px;
+  }
+  .cat-page:nth-child(even) {
+    justify-content: flex-start;
+    padding-right: 66px; padding-left: 2px;
+  }
+}
+
+@media (max-width: 860px) {
+  .cat-bar { padding: 0.55em 10px; gap: 0.5em; }
+  .cat-title { font-size: var(--fs-sm); letter-spacing: var(--ls-body); }
+  .cat-title .chip-demo { margin-left: 0.5em; }
+  .cat-btn { padding: 0.5em 0.7em; letter-spacing: var(--ls-body); }
+  .cat-meta { display: none; }
+  .cat-x { width: 38px; height: 38px; }
+  .cat-foot { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-track { scroll-behavior: auto; }
+}

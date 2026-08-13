@@ -1,0 +1,473 @@
+/* =========================================================
+   with a WISH — A案 Maison Formal
+   style-c.css: 検索ドック（吸着・圧縮）/ 絞り込みFAB・ボトムシート /
+   比較トレイ / 比較ビュー
+   ========================================================= */
+
+/* ---------- 共通: 視覚的に隠す（読み上げには残す） ---------- */
+.vh,
+.vh-when-stuck {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* =========================================================
+   検索ドック
+   ========================================================= */
+.finder-dock {
+  position: sticky; top: 0; z-index: 30;
+  /* body の overflow-x:hidden を外してあるため sticky が正しく効く */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.dock-sentinel { height: 1px; margin-bottom: -1px; pointer-events: none; }
+
+/* 吸着したドックの下に潜り込まないよう、スクロール先に余白を確保する。
+   --dock-h は吸着中の実高が JS から入る（非吸着時は 0px） */
+#product-grid,
+.p-cell,
+[id^="collection"],
+#archive-heading { scroll-margin-top: calc(var(--dock-h) + 14px); }
+
+/* 吸着中は帯を敷いて、下のグリッドと重なっても文字が読めるようにする */
+.finder-dock.is-stuck {
+  background: rgba(20, 18, 15, 0.96);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  border-bottom: 1px solid var(--gold-line);
+}
+/* 背後の商品写真が透けすぎると格式が損なわれるので、ぼかしは効かせつつ濃度は保つ */
+@supports (backdrop-filter: blur(14px)) {
+  .finder-dock.is-stuck { background: rgba(20, 18, 15, 0.94); backdrop-filter: blur(14px); }
+}
+
+/* ---------- PCのコンパクトバー（常時この形＝高さ不変） ----------
+   吸着時に高さを変えると、sticky はフローに残るぶん下のコンテンツが
+   跳ね、スクロールアンカリングと競合して画面が上下に震える。
+   （実測: 下スクロール中に -479px の巻き戻し／吸着が4回反転）
+   そのため吸着で変えるのは背景と影だけにし、寸法は一切動かさない。 */
+@media (min-width: 761px) {
+  .finder-dock .finder {
+    max-width: 1220px;
+    border: 0;
+    padding: 10px var(--pad-x);
+  }
+  /* 実際の並びは #finder-controls の子。.finder に flex を当てても
+     ラッパーが1つあるだけで畳めない */
+  .finder-dock .finder-controls {
+    display: flex; align-items: center; flex-wrap: nowrap;
+    gap: clamp(10px, 1.6vw, 20px);
+  }
+  /* ラベルと凡例は畳んで1行に収める（読み上げには残す） */
+  .finder-dock .finder-controls label,
+  .finder-dock .finder-controls legend,
+  .finder-dock .chip-label {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .finder-dock .finder-code { max-width: 215px; margin: 0; flex: 0 0 auto; }
+  .finder-dock .finder-code input {
+    padding: 0.45em 0.7em; letter-spacing: var(--ls-body); text-align: left;
+  }
+  .finder-dock .finder-colors { margin: 0; flex: 0 1 auto; min-width: 0; }
+  .finder-dock .chip-row { flex-wrap: nowrap; gap: 6px; justify-content: flex-start; }
+  /* 色チップはドットだけ。読み上げ名は .chip-label が保持する */
+  .finder-dock .chip {
+    width: 32px; height: 32px; padding: 0;
+    border-radius: 50%; justify-content: center; gap: 0;
+    flex: none;
+  }
+  .finder-dock .chip .chip-dot { width: 16px; height: 16px; }
+  .finder-dock .finder-selects { margin: 0; gap: 8px; flex: 0 1 auto; min-width: 0; }
+  .finder-dock .finder-field { min-width: 0; flex: 0 1 auto; }
+  .finder-dock .finder-controls select { padding: 0.42em 0.6em; font-size: var(--fs-xs); }
+  .finder-dock .finder-clear { padding: 0.4em 0.2em; white-space: nowrap; }
+  .finder-dock .finder-status {
+    margin: 0; padding: 0 var(--pad-x) 9px;
+    text-align: right;
+  }
+  /* サイズ診断はバーの外。開閉しても吸着バーの高さに影響しない */
+  #size-aid-home {
+    max-width: 1220px;
+    margin: 1.4rem auto 2rem;
+    padding: 0 var(--pad-x);
+  }
+  #size-aid-home .size-aid { max-width: 720px; margin: 0 auto; }
+}
+
+/* =========================================================
+   絞り込み FAB（SPのみ）
+   ========================================================= */
+.fab {
+  position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 60;
+  display: inline-flex; align-items: center; gap: 0.5em;
+  background: var(--gold); color: var(--ink);
+  border: 0; border-radius: 999px;
+  font-size: var(--fs-sm); font-weight: 700; letter-spacing: var(--ls-wide);
+  padding: 0.95em 1.6em;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-out), bottom 0.3s var(--ease-out);
+}
+.fab:hover { transform: translateY(-2px); background: var(--gold-bright); }
+/* トレイが出ているときは持ち上げて重ならないようにする */
+.fab.is-lifted { bottom: calc(104px + env(safe-area-inset-bottom)); }
+.fab-badge {
+  display: inline-grid; place-items: center;
+  min-width: 1.7em; height: 1.7em; padding: 0 0.4em;
+  background: var(--ink); color: var(--gold-bright);
+  border-radius: 999px;
+  font-size: var(--fs-2xs); font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   ページ先頭へ戻る
+   ========================================================= */
+.to-top {
+  position: fixed; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom));
+  z-index: 58;
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  background: rgba(20, 18, 15, 0.9);
+  border: 1px solid var(--gold-line);
+  color: var(--gold-text);
+  font-size: var(--fs-lg); line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s var(--ease-out), background 0.3s ease, bottom 0.3s var(--ease-out);
+}
+.to-top:hover { transform: translateY(-2px); background: var(--gold); color: var(--ink); border-color: var(--gold); }
+@supports (backdrop-filter: blur(8px)) {
+  .to-top { background: rgba(20, 18, 15, 0.78); backdrop-filter: blur(8px); }
+}
+/* SPは同じ右下に絞り込みFABがあるので、その上へ積む。
+   トレイが出るとFABが持ち上がるので、こちらも連動して逃がす */
+@media (max-width: 760px) {
+  .to-top {
+    right: 16px;
+    bottom: calc(80px + env(safe-area-inset-bottom));
+    width: 44px; height: 44px;
+  }
+  .to-top.is-lifted { bottom: calc(168px + env(safe-area-inset-bottom)); }
+}
+
+/* =========================================================
+   ボトムシート（SPの絞り込み）
+   ========================================================= */
+.sheet-back {
+  position: fixed; inset: 0; z-index: 70;
+  background: rgba(8, 7, 5, 0.7);
+  opacity: 0; transition: opacity 0.24s ease;
+}
+.sheet-back.is-open { opacity: 1; }
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+  max-height: 86vh;
+  display: flex; flex-direction: column;
+  background: var(--ink-raised);
+  border-top: 1px solid var(--gold-line);
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.7);
+  transform: translateY(102%);
+  transition: transform 0.26s var(--ease-swift, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.sheet.is-open { transform: none; }
+.sheet-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1em; flex: none;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.sheet-hd h2 {
+  font-family: var(--serif-ja);
+  font-size: var(--fs-lg); letter-spacing: var(--ls-label);
+}
+.sheet-x {
+  width: 40px; height: 40px; flex: none;
+  display: grid; place-items: center;
+  background: none; border: 1px solid var(--line-strong);
+  color: var(--ivory); font-size: 1.2rem; line-height: 1;
+  cursor: pointer;
+}
+.sheet-x:hover { border-color: var(--gold); color: var(--gold-text); }
+.sheet-bd { overflow-y: auto; padding: 4px 16px 12px; }
+.sheet-ft {
+  flex: none;
+  padding: 12px 16px calc(14px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+}
+.sheet-ft .btn { width: 100%; }
+/* シートの中では罫線や中央寄せを解除して素直な縦積みにする */
+.sheet .finder-controls > * { text-align: left; }
+.sheet .finder-code { max-width: none; margin: 0; text-align: left; }
+.sheet .finder-code input { text-align: left; }
+.sheet .finder-colors { margin-top: 1.4rem; text-align: left; }
+.sheet .finder-colors legend { margin-inline: 0; }
+.sheet .chip-row { justify-content: flex-start; }
+.sheet .finder-selects { justify-content: flex-start; margin-top: 1.4rem; }
+.sheet .size-aid { margin: 1.4rem 0 0.4rem; }
+.sheet .size-aid summary { text-align: left; }
+/* 狭幅では3項目を2列に落として、入力欄が潰れないようにする */
+.sheet .size-aid-fields { justify-content: flex-start; }
+/* grow させると3つ目が単独行で全幅に伸びて不揃いになる */
+.sheet .size-aid-fields .finder-field { flex: 0 1 calc(50% - 0.45rem); max-width: none; }
+.sheet .size-aid-fields .btn { width: 100%; text-align: center; }
+
+/* =========================================================
+   色チップ（SPの折り返し圧縮）
+   ========================================================= */
+@media (max-width: 760px) {
+  /* 9行に折り返して縦を食っていたので2列グリッドに畳む */
+  .chip-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 8px;
+  }
+  .chip { width: 100%; justify-content: flex-start; }
+  /* SPでは常にシート経由で操作するため、ページ内パネルの吸着は行わない */
+  .finder-dock { position: static; }
+}
+@media (max-width: 359px) {
+  .chip-row { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   比較トレイ
+   ========================================================= */
+.tray {
+  position: fixed; left: 50%; bottom: 18px; z-index: 55;
+  transform: translateX(-50%);
+  width: min(760px, calc(100vw - 32px));
+  display: flex; align-items: center; gap: clamp(10px, 2vw, 18px);
+  background: rgba(25, 23, 19, 0.96);
+  border: 1px solid var(--gold-line);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65);
+  padding: 10px 14px;
+}
+@supports (backdrop-filter: blur(10px)) {
+  .tray { background: rgba(25, 23, 19, 0.86); backdrop-filter: blur(10px); }
+}
+.tray-lab {
+  flex: none;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small); letter-spacing: var(--ls-wide);
+  color: var(--ivory-dim);
+}
+.tray-n {
+  display: inline-block; margin-left: 0.5em;
+  color: var(--gold-text); font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.tray-items {
+  display: flex; align-items: center; gap: 8px;
+  flex: 1 1 auto; min-width: 0;
+  overflow-x: auto; list-style: none;
+}
+.tray-items li { flex: none; position: relative; }
+.tray-thumb {
+  display: block; width: 40px; height: 56px;
+  background: #F7F4EC; border: 1px solid var(--gold-line);
+  padding: 2px; cursor: pointer;
+}
+.tray-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.tray-x {
+  position: absolute; top: -7px; right: -7px;
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--ivory);
+  border: 1px solid var(--line-strong); border-radius: 50%;
+  font-size: 11px; line-height: 1; cursor: pointer;
+}
+.tray-x:hover { border-color: var(--gold); color: var(--gold-text); }
+.tray-acts { flex: none; display: flex; align-items: center; gap: 10px; }
+.tray-acts .btn { padding: 0.6em 1.2em; }
+.tray-acts .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.tray-clear {
+  background: none; border: 0; cursor: pointer;
+  color: var(--ivory-dim);
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  text-decoration: underline; text-underline-offset: 4px;
+  white-space: nowrap;
+}
+.tray-clear:hover { color: var(--gold-text); }
+
+/* カード上の「比較」トグル（button の入れ子を避けるためセルで包む） */
+.p-cell { position: relative; }
+.cmp-toggle {
+  position: absolute; top: 6px; right: 6px; z-index: 2;
+  min-width: 44px; min-height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(20, 18, 15, 0.82);
+  border: 1px solid var(--line-strong);
+  color: var(--ivory-dim);
+  font-size: var(--fs-2xs); font-weight: var(--wt-small); letter-spacing: 0.04em;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+}
+.cmp-toggle:hover { border-color: var(--gold); color: var(--ivory); }
+.cmp-toggle[aria-pressed="true"] {
+  background: var(--gold); border-color: var(--gold); color: var(--ink);
+  font-weight: 700;
+}
+
+/* 商品詳細モーダル内の比較ボタン。
+   隣の「品番をコピー」と同じ見た目だと選択中かどうか判別できないため、
+   グリッドのトグルと同じ金の選択状態を与える */
+.pd-cmp[aria-pressed="true"] {
+  background: var(--gold); border-color: var(--gold); color: var(--ink);
+  font-weight: 700;
+}
+.pd-cmp[aria-pressed="true"]:hover { background: var(--gold-bright); }
+.pd-code { align-items: center; }
+
+/* =========================================================
+   比較ビュー
+   ========================================================= */
+.cmp-wrap { overflow-x: auto; margin-top: 1.4rem; }
+.cmp-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(210px, 1fr);
+  gap: clamp(12px, 2vw, 22px);
+  min-width: min-content;
+}
+.cmp-col { min-width: 0; }
+.cmp-col .p-frame { padding: 6px; }
+.cmp-col figcaption { margin-top: 0.6rem; text-align: center; }
+.cmp-dl { margin-top: 0.9rem; border-top: 1px solid var(--line); }
+.cmp-dl > div {
+  display: grid; grid-template-columns: 5.2em 1fr; gap: 0.7em;
+  padding: 0.55em 0.15em;
+  border-bottom: 1px solid var(--line);
+}
+.cmp-dl dt {
+  font-size: var(--fs-2xs); font-weight: var(--wt-small); letter-spacing: var(--ls-wide);
+  color: var(--ivory-faint);
+}
+.cmp-dl dd { font-size: var(--fs-xs); color: var(--ivory); }
+
+/* =========================================================
+   衣裳店デスクのツール（空き状況 / 予約 / 販促素材）
+   ========================================================= */
+.desk-tool { margin-top: 1.6rem; }
+.desk-tool-field { max-width: 220px; }
+.desk-tool-field label {
+  display: block;
+  font-size: var(--fs-xs); font-weight: var(--wt-small); letter-spacing: var(--ls-label);
+  color: var(--ivory-dim); margin-bottom: 0.5em;
+}
+.desk-tool-field input {
+  width: 100%; background: var(--ink-deep);
+  border: 1px solid var(--line-strong); color: var(--ivory);
+  font: inherit; font-size: 16px; padding: 0.55em 0.85em; border-radius: 0;
+  letter-spacing: 0.14em; font-variant-numeric: tabular-nums;
+}
+.desk-tool-note {
+  margin-top: 1em;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  color: var(--ivory-faint);
+}
+#av-name { color: var(--ivory-dim); font-size: var(--fs-sm); }
+
+/* 空き状況カレンダー */
+.cal { width: 100%; border-collapse: collapse; margin-top: 1.3rem; }
+.cal-cap {
+  caption-side: top; text-align: left; padding-bottom: 0.7em;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small); letter-spacing: var(--ls-wide);
+  color: var(--ivory-faint);
+}
+.cal th {
+  font-size: var(--fs-2xs); font-weight: var(--wt-small); letter-spacing: var(--ls-wide);
+  color: var(--ivory-faint);
+  padding: 0.4em 0; border-bottom: 1px solid var(--line);
+}
+.cal td {
+  border: 1px solid var(--line);
+  padding: 0.5em 0.2em; text-align: center; vertical-align: middle;
+}
+.cal td.is-past { color: var(--ivory-faint); background: rgba(0, 0, 0, 0.25); }
+.cal-d {
+  display: block;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  color: var(--ivory-faint);
+  font-variant-numeric: tabular-nums;
+}
+.cal-s { display: block; font-size: var(--fs-lg); line-height: 1.5; }
+/* 記号だけに頼らず色でも伝える（記号は読み上げから除外し .cal-sr で語を渡す） */
+.st-ok { color: var(--gold-text); }
+.st-few { color: #E0C98A; }
+.st-no { color: var(--error-dark); }
+.cal-sr {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.cal-legend {
+  margin-top: 0.9em;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  color: var(--ivory-dim);
+}
+.cal-legend span { font-size: var(--fs-sm); margin-right: 0.2em; }
+
+/* 予約ウィザード */
+.wiz-steps {
+  display: flex; list-style: none; gap: 6px;
+  margin: 1.5rem 0 1.6rem;
+}
+.wiz-steps li {
+  flex: 1 1 0; text-align: center;
+  border-top: 2px solid var(--line-strong);
+  padding-top: 0.7em;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small); letter-spacing: var(--ls-wide);
+  color: var(--ivory-faint);
+}
+.wiz-steps li[aria-current="step"] { border-top-color: var(--gold); color: var(--gold-text); }
+.wiz-nav {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;
+  margin-top: 1.6rem;
+}
+.wiz-done { text-align: center; padding: 1.2rem 0 0.4rem; }
+#reserve-dialog .invite-field label {
+  display: block;
+  font-size: var(--fs-xs); font-weight: var(--wt-small); letter-spacing: var(--ls-label);
+  color: var(--ivory-dim); margin-bottom: 0.4em;
+}
+#reserve-dialog input {
+  width: 100%; background: var(--ink-deep);
+  border: 1px solid var(--line-strong); color: var(--ivory);
+  font: inherit; font-size: 16px; padding: 0.6em 0.9em; border-radius: 0;
+}
+#reserve-dialog .field-error { color: var(--error-dark); }
+#rv-sched { max-width: none; margin-top: 1.3rem; }
+
+/* 販促素材 */
+.asset-list { list-style: none; margin-top: 1.4rem; border-top: 1px solid var(--line); }
+.asset-list li {
+  display: flex; align-items: center; justify-content: space-between; gap: 1em;
+  padding: 0.9em 0.2em;
+  border-bottom: 1px solid var(--line);
+}
+.asset-name { font-size: var(--fs-sm); }
+.asset-meta {
+  display: block;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  color: var(--ivory-faint);
+  font-variant-numeric: tabular-nums;
+}
+.asset-list .btn { flex: none; }
+
+@media (max-width: 560px) {
+  .cal td { padding: 0.35em 0.1em; }
+  .cal-s { font-size: var(--fs-sm); }
+  .wiz-nav .btn { flex: 1 1 auto; text-align: center; }
+  .asset-list li { flex-wrap: wrap; }
+}
+
+/* =========================================================
+   reduced motion
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .sheet, .sheet-back, .fab, .finder-dock { transition: none !important; }
+}

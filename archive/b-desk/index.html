@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>with a WISH 業務デスク — B案 Working Desk（デザイン提案サンプル）</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2322242a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f5f1e8' text-anchor='middle' font-style='italic'%3EW%3C/text%3E%3C/svg%3E">
+<meta name="description" content="新郎タキシード with a WISH フルリプレイス提案 B案。全125型から3クリックで一着へ辿り着く、衣裳店さまのための業務ファインダー。">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F6F3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style-b.css">
+</head>
+<body id="top">
+<a class="skip" href="#collection">コレクション一覧へスキップ</a>
+
+<div class="util">
+  <a href="../index.html">&larr; 提案トップへ戻る</a>
+  <span class="util-note">デザイン提案サンプル B案 — Working Desk「衣裳店の道具」</span>
+</div>
+
+<header class="hd">
+  <div class="hd-brand">
+    <a class="hd-logo" href="#top">with a WISH</a>
+    <span class="hd-label">衣裳店さま向け業務デスク</span>
+  </div>
+  <nav class="hd-nav" aria-label="ヘッダー">
+    <a class="hd-groom" href="#groom">新郎・ご新婦の方はこちら ↓</a>
+    <a class="btn btn-primary hd-login" href="#desk">ログイン(デモ)</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-h">
+    <p class="hero-kicker">WORKING DESK <span aria-hidden="true">—</span> 取扱い衣裳店さま専用ファインダー</p>
+    <h1 id="hero-h">全<b class="num">125</b>型から、<b class="num">3</b>クリックで一着へ。</h1>
+    <p class="hero-lead">品番・色・ライン・サイズ。接客の途中でも迷わず目的の一着へ辿り着き、そのまま空き状況の確認からご予約(デモ)まで。衣裳店さまの毎日の道具として設計しました。</p>
+    <ul class="hero-stats" aria-label="ブランドの数字">
+      <li><b class="num">1962</b>年創業</li>
+      <li>国内シェア<b class="num">No.1</b></li>
+      <li>自社在庫<b class="num">10,000</b>着</li>
+      <li>取扱い<b class="num">3,000</b>店</li>
+    </ul>
+  </section>
+
+  <div class="fbar" id="fbar">
+    <div class="fbar-in" id="finder-controls">
+      <div class="fd fd-code">
+        <label class="fd-lab" for="f-code">品番</label>
+        <input type="search" id="f-code" inputmode="numeric" autocomplete="off" placeholder="品番 例) 20432" aria-description="部分一致で絞り込みます">
+      </div>
+      <div class="fd fd-colors">
+        <span class="fd-lab" id="lab-color">色</span>
+        <div class="fd-chips" role="group" aria-labelledby="lab-color">
+          <button type="button" class="chip" data-color="1" aria-pressed="false" aria-label="ブラック系" title="ブラック系" style="--c:#1a1a1e"></button>
+          <button type="button" class="chip" data-color="2" aria-pressed="false" aria-label="ホワイト系" title="ホワイト系" style="--c:#f2efe8"></button>
+          <button type="button" class="chip" data-color="3" aria-pressed="false" aria-label="ベージュ／ゴールド系" title="ベージュ／ゴールド系" style="--c:#c9b17a"></button>
+          <button type="button" class="chip" data-color="4" aria-pressed="false" aria-label="ピンク／パープル系" title="ピンク／パープル系" style="--c:#b284a8"></button>
+          <button type="button" class="chip" data-color="5" aria-pressed="false" aria-label="ブルー／ネイビー系" title="ブルー／ネイビー系" style="--c:#2b3a5e"></button>
+          <button type="button" class="chip" data-color="6" aria-pressed="false" aria-label="グレー／シルバー系" title="グレー／シルバー系" style="--c:#9aa0a6"></button>
+          <button type="button" class="chip" data-color="7" aria-pressed="false" aria-label="グリーン／カーキ系" title="グリーン／カーキ系" style="--c:#5c6b4e"></button>
+          <button type="button" class="chip" data-color="8" aria-pressed="false" aria-label="ブラウン／レッド系" title="ブラウン／レッド系" style="--c:#7a4a3a"></button>
+          <button type="button" class="chip" data-color="9" aria-pressed="false" aria-label="イエロー／オレンジ系" title="イエロー／オレンジ系" style="--c:#d8a13c"></button>
+        </div>
+      </div>
+      <div class="fd fd-line">
+        <label class="fd-lab" for="f-line">ライン</label>
+        <select id="f-line">
+          <option value="">すべて</option>
+          <option value="1">BASIC ルーズフィット</option>
+          <option value="2">NEW REGULAR レギュラーフィット</option>
+          <option value="3">NATURAL スリムフィット</option>
+          <option value="4">MASA タイトフィット</option>
+          <option value="5">J-LINE スーパータイトフィット</option>
+        </select>
+      </div>
+      <div class="fd fd-body">
+        <label class="fd-lab" for="f-body">体型</label>
+        <select id="f-body">
+          <option value="">すべて</option>
+          <option value="Y">Y体</option><option value="A">A体</option><option value="AB">AB体</option>
+          <option value="B">B体</option><option value="O">O体</option><option value="E">E体</option><option value="K">K体</option>
+        </select>
+      </div>
+      <div class="fd fd-diag">
+        <button type="button" id="diag-btn" class="btn btn-ghost" aria-expanded="false" aria-controls="diag-pop">サイズ診断</button>
+        <div class="diag-pop" id="diag-pop" role="dialog" aria-label="サイズ診断" hidden>
+          <h3 class="diag-h">サイズ診断</h3>
+          <p class="diag-lead">3つの採寸値から、63サイズの目安を判定します。</p>
+          <div class="diag-fields">
+            <label class="diag-f">身長 (cm)<input id="dg-h" inputmode="decimal" autocomplete="off" placeholder="175"></label>
+            <label class="diag-f">胸囲 (cm)<input id="dg-c" inputmode="decimal" autocomplete="off" placeholder="94"></label>
+            <label class="diag-f">ウエスト (cm)<input id="dg-w" inputmode="decimal" autocomplete="off" placeholder="82"></label>
+          </div>
+          <button type="button" id="dg-run" class="btn btn-primary">判定する</button>
+          <div class="diag-out" aria-live="polite">
+            <p class="field-err" id="dg-err" hidden></p>
+            <div class="diag-res" id="dg-res" hidden>
+              <p class="diag-size">判定サイズ <b class="num" id="dg-label">—</b></p>
+              <p class="diag-spec" id="dg-spec"></p>
+              <button type="button" id="dg-apply" class="btn btn-primary">この体型で絞り込む</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fd fd-status">
+        <p class="fd-count" aria-live="polite"><b class="num" id="f-count">125</b><span class="fd-total"> / 125 型</span></p>
+        <button type="button" id="f-clear" class="fd-clear" hidden>条件クリア</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec sec-grid" id="collection" aria-labelledby="col-h">
+    <header class="sec-hd">
+      <p class="sec-no num" aria-hidden="true">01</p>
+      <h2 class="sec-t" id="col-h">コレクション<span class="sec-en">ALL 125 MODELS</span></h2>
+      <p class="sec-note">価格は非掲載です。レンタル料金は各衣裳店さまにてご案内ください。</p>
+    </header>
+    <div class="grid" id="grid">
+      <article class="card" data-code="20432">
+        <button type="button" class="card-open" data-open="20432"><span class="card-media"><img src="../../assets/img/p/20432.jpg" alt="品番20432 ロイヤルオリーヴ（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20432</span><span class="card-name">ロイヤルオリーヴ</span><span class="card-meta"><span class="dot" style="background:#5c6b4e"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20432" aria-pressed="false" aria-label="品番20432を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20425">
+        <button type="button" class="card-open" data-open="20425"><span class="card-media"><img src="../../assets/img/p/20425.jpg" alt="品番20425 イエロー／オレンジ系（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20425</span><span class="card-name">イエロー／オレンジ系</span><span class="card-meta"><span class="dot" style="background:#d8a13c"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20425" aria-pressed="false" aria-label="品番20425を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20423">
+        <button type="button" class="card-open" data-open="20423"><span class="card-media"><img src="../../assets/img/p/20423.jpg" alt="品番20423 プレミアムグレージュ（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20423</span><span class="card-name">プレミアムグレージュ</span><span class="card-meta"><span class="dot" style="background:#f2efe8"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20423" aria-pressed="false" aria-label="品番20423を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20422">
+        <button type="button" class="card-open" data-open="20422"><span class="card-media"><img src="../../assets/img/p/20422.jpg" alt="品番20422 ミステリアスブルー（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20422</span><span class="card-name">ミステリアスブルー</span><span class="card-meta"><span class="dot" style="background:#2b3a5e"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20422" aria-pressed="false" aria-label="品番20422を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20420">
+        <button type="button" class="card-open" data-open="20420"><span class="card-media"><img src="../../assets/img/p/20420.jpg" alt="品番20420 アンバーホワイト（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20420</span><span class="card-name">アンバーホワイト</span><span class="card-meta"><span class="dot" style="background:#f2efe8"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20420" aria-pressed="false" aria-label="品番20420を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20419">
+        <button type="button" class="card-open" data-open="20419"><span class="card-media"><img src="../../assets/img/p/20419.jpg" alt="品番20419 モードブラック（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20419</span><span class="card-name">モードブラック</span><span class="card-meta"><span class="dot" style="background:#1a1a1e"></span>TUXEDO</span><span class="card-tag">MASA</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20419" aria-pressed="false" aria-label="品番20419を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20417">
+        <button type="button" class="card-open" data-open="20417"><span class="card-media"><img src="../../assets/img/p/20417.jpg" alt="品番20417 ロイヤルブラウン（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20417</span><span class="card-name">ロイヤルブラウン</span><span class="card-meta"><span class="dot" style="background:#7a4a3a"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20417" aria-pressed="false" aria-label="品番20417を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20416">
+        <button type="button" class="card-open" data-open="20416"><span class="card-media"><img src="../../assets/img/p/20416.jpg" alt="品番20416 クリアシャンパン（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20416</span><span class="card-name">クリアシャンパン</span><span class="card-meta"><span class="dot" style="background:#c9b17a"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20416" aria-pressed="false" aria-label="品番20416を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20414">
+        <button type="button" class="card-open" data-open="20414"><span class="card-media"><img src="../../assets/img/p/20414.jpg" alt="品番20414 シュネーグレイ（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20414</span><span class="card-name">シュネーグレイ</span><span class="card-meta"><span class="dot" style="background:#9aa0a6"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20414" aria-pressed="false" aria-label="品番20414を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20411">
+        <button type="button" class="card-open" data-open="20411"><span class="card-media"><img src="../../assets/img/p/20411.jpg" alt="品番20411 ブルーイッシュブラック（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20411</span><span class="card-name">ブルーイッシュブラック</span><span class="card-meta"><span class="dot" style="background:#1a1a1e"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20411" aria-pressed="false" aria-label="品番20411を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20410">
+        <button type="button" class="card-open" data-open="20410"><span class="card-media"><img src="../../assets/img/p/20410.jpg" alt="品番20410 シティオリーヴ（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20410</span><span class="card-name">シティオリーヴ</span><span class="card-meta"><span class="dot" style="background:#5c6b4e"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20410" aria-pressed="false" aria-label="品番20410を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="20409">
+        <button type="button" class="card-open" data-open="20409"><span class="card-media"><img src="../../assets/img/p/20409.jpg" alt="品番20409 チノベージュ（TUXEDO）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">20409</span><span class="card-name">チノベージュ</span><span class="card-meta"><span class="dot" style="background:#c9b17a"></span>TUXEDO</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="20409" aria-pressed="false" aria-label="品番20409を比較リストに追加">比較</button>
+      </article>
+      <article class="card" data-code="779">
+        <button type="button" class="card-open" data-open="779"><span class="card-media"><img src="../../assets/img/p/779.jpg" alt="品番779 ディープティールグリーン（MORNING COAT）" width="642" height="900" loading="lazy"></span><span class="card-info"><span class="card-code num">779</span><span class="card-name">ディープティールグリーン</span><span class="card-meta"><span class="dot" style="background:#5c6b4e"></span>MORNING COAT</span><span class="card-tag">NEW REGULAR</span></span></button>
+        <button type="button" class="card-cmp" data-cmp="779" aria-pressed="false" aria-label="品番779を比較リストに追加">比較</button>
+      </article>
+    </div>
+    <div class="grid-empty" id="grid-empty" hidden>
+      <p>該当する型がありません。</p>
+      <button type="button" class="btn btn-ghost" id="empty-clear">条件をクリアして全125型を表示</button>
+    </div>
+    <noscript><p class="grid-noscript">現在は抜粋13型を表示しています。JavaScript を有効にすると、全125型の一覧と絞り込みをご利用いただけます。</p></noscript>
+  </section>
+
+  <div class="band">
+    <img src="../../assets/img/about/making01.jpg" alt="" width="1400" height="945" loading="lazy">
+    <div class="band-in">
+      <p class="band-kicker">MADE IN JAPAN, ONE BY ONE</p>
+      <p class="band-t">花嫁がドレスを選ぶように、花婿にも「運命の一着」を。</p>
+      <p class="band-d">100型を超えるデザインと63のサイズを、日本の自社アトリエで一着ずつ仕立て、全国約3,000の衣裳店へお届けしています。</p>
+    </div>
+  </div>
+
+  <section class="sec sec-delivery" id="delivery" aria-labelledby="dv-h">
+    <header class="sec-hd">
+      <p class="sec-no num" aria-hidden="true">02</p>
+      <h2 class="sec-t" id="dv-h">納期チェッカー<span class="sec-en">DELIVERY</span></h2>
+      <p class="sec-note">ご使用日から、予約締切・出荷・お届け・ご返送日を逆算します。</p>
+    </header>
+    <div class="dv-wrap">
+      <p class="dv-counter">本日<b class="num">24:00</b>までのご予約で、最短 <b class="num" id="dv-fast">計算中…</b> お届け</p>
+      <form class="dv-form" id="dv-form" novalidate>
+        <div class="dv-field">
+          <label for="dv-date">ご使用日（挙式・お式の日）</label>
+          <input type="date" id="dv-date" required>
+        </div>
+        <button type="submit" class="btn btn-primary">納期を逆算する</button>
+        <p class="field-err" id="dv-err" hidden></p>
+      </form>
+      <ol class="dv-tl" id="dv-tl" hidden>
+        <li><span class="dv-step">予約締切</span><b class="num" data-dv="deadline"></b></li>
+        <li><span class="dv-step">出荷</span><b class="num" data-dv="ship"></b></li>
+        <li><span class="dv-step">お届け</span><b class="num" data-dv="arrive"></b></li>
+        <li class="dv-use"><span class="dv-step">ご使用日</span><b class="num" data-dv="use"></b></li>
+        <li><span class="dv-step">ご返送</span><b class="num" data-dv="ret"></b></li>
+      </ol>
+      <p class="dv-note" id="dv-note">出荷前日24:00まで予約受付（翌日が平日の場合）。※提案用のデモ計算です。実際の納期は在庫状況・地域により異なります。</p>
+    </div>
+  </section>
+
+  <section class="sec sec-desk" id="desk" aria-labelledby="desk-h">
+    <header class="sec-hd">
+      <p class="sec-no num" aria-hidden="true">03</p>
+      <h2 class="sec-t" id="desk-h">衣裳店デスク<span class="sec-en">VENDOR DESK</span></h2>
+      <p class="sec-note">予約・カタログ・販促素材を、ひとつのIDに統合するご提案です。</p>
+    </header>
+    <div class="desk-login">
+      <div>
+        <p class="dl-lab">取扱い衣裳店さま専用ログイン</p>
+        <p class="dl-note">予約・カタログ・販促素材をひとつのIDで（統合提案）。現在は既存のWEB予約システムへ接続します。</p>
+      </div>
+      <a class="btn btn-primary" href="https://www.mbs-netservice.com/Web/" target="_blank" rel="noopener">ログイン(デモ) ↗</a>
+    </div>
+    <ul class="desk-cards">
+      <li><p class="dc-key num">STOCK<span class="badge">デモ</span></p><h3>空き状況チェック</h3><p>ご希望の商品・お日にちの空き状況を24時間確認できます。</p><a class="dc-link" href="#collection">型を選んで確認 ↑</a></li>
+      <li><p class="dc-key num">ORDER<span class="badge">デモ</span></p><h3>WEB予約登録</h3><p>出荷前日24時まで、その場で予約完了。確認書はメールでお届け。</p><a class="dc-link" href="#collection">型を選んで予約 ↑</a></li>
+      <li><p class="dc-key num">CATALOG<span class="badge">デモ</span></p><h3>デジタルカタログ</h3><p>全125型の最新カタログ。店頭のタブレットでもご覧いただけます。</p><a class="dc-link" href="#collection">コレクションを見る ↑</a></li>
+      <li><p class="dc-key num">ASSETS<span class="badge">デモ</span></p><h3>販促素材ダウンロード</h3><p>商品写真・ロゴ・POPデータを自店のサイトやSNSでご利用いただけます。</p><button type="button" class="dc-link" id="dc-assets">素材を見る（デモ）</button></li>
+    </ul>
+    <div class="desk-contact">
+      <div class="dk-tel">
+        <p class="dk-lab">お電話でのご注文・ご相談</p>
+        <p class="dk-num num">072-729-1642</p>
+        <p class="dk-sub">受付 月〜金 9:45〜16:00</p>
+      </div>
+      <div class="dk-fax">
+        <p class="dk-lab">FAXでのご注文</p>
+        <p class="dk-num num">0120-127-823</p>
+        <p class="dk-sub">お電話・FAXでのご注文も従来どおり承ります。</p>
+      </div>
+      <p class="dk-deadline">予約締切：出荷前日<b class="num">24:00</b>まで（翌日が平日の場合）</p>
+    </div>
+    <h3 class="sub-h">お取引の流れ</h3>
+    <ol class="flow">
+      <li><span class="flow-no num">01</span><h4>空き状況を確認</h4><p>WEB予約システムで24時間、商品の空き状況をチェック。お電話でも承ります。</p></li>
+      <li><span class="flow-no num">02</span><h4>予約を登録</h4><p>出荷前日24時まで予約可能（翌日が平日の場合）。WEB・電話・FAXで受付。</p></li>
+      <li><span class="flow-no num">03</span><h4>発注確認</h4><p>ご予約内容をメールとFAXでお知らせ。内容をご確認ください。</p></li>
+      <li><span class="flow-no num">04</span><h4>受取・ご試着</h4><p>ご指定の店舗へ配送。お客様のご試着・ご成約にお役立てください。</p></li>
+      <li><span class="flow-no num">05</span><h4>ご返送</h4><p>ご利用後は同梱の伝票でご返送ください。クリーニング不要です。</p></li>
+    </ol>
+  </section>
+
+  <section class="sec sec-recruit" id="recruit" aria-labelledby="rc-h">
+    <header class="sec-hd">
+      <p class="sec-no num" aria-hidden="true">04</p>
+      <h2 class="sec-t" id="rc-h">お取扱いをご検討の衣裳店さまへ<span class="sec-en">PARTNERSHIP</span></h2>
+      <p class="sec-note">在庫を持たずに、100型・63サイズをお店の品揃えに。</p>
+    </header>
+    <ul class="merits">
+      <li><h3>在庫リスクゼロ</h3><p>自社で在庫を持たずに100型・63サイズの品揃えをお店のラインナップに。1着からの取寄せでご利用いただけます。</p></li>
+      <li><h3>国内シェアNo.1の安心</h3><p>創業1962年・婚礼衣裳ひと筋。全国約3,000店の衣裳店さまとお取引しています。</p></li>
+      <li><h3>接客がそのまま売上に</h3><p>新郎さまはWEBで下見済み。サイズ×デザインの提案ツールで、試着から成約までを短縮します。</p></li>
+    </ul>
+    <h3 class="sub-h">よくあるご質問</h3>
+    <div class="faq" id="faq">
+      <div class="faq-item"><h4><button type="button" class="faq-q" aria-expanded="false">取扱いを始めるには何が必要ですか？</button></h4><div class="faq-a" hidden><p>下記フォームよりお申込みください。審査ののち、専用IDを発行いたします。初期費用・年会費は不要です。（デモ文言）</p></div></div>
+      <div class="faq-item"><h4><button type="button" class="faq-q" aria-expanded="false">予約はいつまでできますか？</button></h4><div class="faq-a" hidden><p>出荷前日の24時まで承ります（翌日が平日の場合）。お急ぎの場合はお電話でご相談ください。</p></div></div>
+      <div class="faq-item"><h4><button type="button" class="faq-q" aria-expanded="false">汚損・破損があった場合は？</button></h4><div class="faq-a" hidden><p>通常のご利用範囲の汚れはクリーニング不要でそのままご返送ください。著しい汚損・破損は個別にご相談させていただきます。（デモ文言）</p></div></div>
+      <div class="faq-item"><h4><button type="button" class="faq-q" aria-expanded="false">試着用の在庫を店舗に置けますか？</button></h4><div class="faq-a" hidden><p>サンプルの取扱いについては担当までご相談ください。デジタルカタログとサイズ表で、店頭在庫なしでもご提案いただけます。（デモ文言）</p></div></div>
+      <div class="faq-item"><h4><button type="button" class="faq-q" aria-expanded="false">新作の情報はどこで確認できますか？</button></h4><div class="faq-a" hidden><p>会員向けメールとデジタルカタログでいち早くお知らせします。</p></div></div>
+    </div>
+    <h3 class="sub-h" id="rc-form-h">お問い合わせ</h3>
+    <form class="rc-form" id="rc-form" aria-labelledby="rc-form-h" novalidate>
+      <div class="rc-grid">
+        <div class="field">
+          <label for="rc-kind">お問い合わせ種別</label>
+          <select id="rc-kind" required>
+            <option value="">選択してください</option>
+            <option>既存のお取引店</option>
+            <option>新規お取扱いを希望</option>
+          </select>
+          <p class="field-err" hidden>種別を選択してください。</p>
+        </div>
+        <div class="field">
+          <label for="rc-company">貴社名</label>
+          <input type="text" id="rc-company" autocomplete="organization" required>
+          <p class="field-err" hidden>貴社名をご入力ください。</p>
+        </div>
+        <div class="field">
+          <label for="rc-name">ご担当者名</label>
+          <input type="text" id="rc-name" autocomplete="name" required>
+          <p class="field-err" hidden>お名前をご入力ください。</p>
+        </div>
+        <div class="field">
+          <label for="rc-mail">メールアドレス</label>
+          <input type="email" id="rc-mail" autocomplete="email" inputmode="email" required>
+          <p class="field-err" hidden>正しいメールアドレスをご入力ください。</p>
+        </div>
+        <div class="field field-wide">
+          <label for="rc-msg">お問い合わせ内容</label>
+          <textarea id="rc-msg" rows="5" required></textarea>
+          <p class="field-err" hidden>内容をご入力ください。</p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">送信する（デモ）</button>
+      <p class="rc-note">※デザイン提案サンプルのため、実際には送信されません。</p>
+    </form>
+    <div class="rc-done" id="rc-done" hidden tabindex="-1">
+      <p class="done-mark" aria-hidden="true">✓</p>
+      <h3>お問い合わせを受け付けました（デモ）</h3>
+      <p>実運用時は、担当者より2営業日以内にご連絡を差し上げる想定です。</p>
+    </div>
+  </section>
+
+  <section class="sec sec-groom" id="groom" aria-labelledby="gr-h">
+    <header class="sec-hd">
+      <p class="sec-no num" aria-hidden="true">05</p>
+      <h2 class="sec-t" id="gr-h">新郎・ご新婦の方へ<span class="sec-en">FOR COUPLES</span></h2>
+      <p class="sec-note">運命の一着は、お近くの取扱い衣裳店でお待ちしています。</p>
+    </header>
+    <ul class="gr-nums">
+      <li><b class="num">No.1</b><span>国内シェア<br>新郎タキシード取寄せレンタル</span></li>
+      <li><b class="num">100<i>型以上</i></b><span>デザインバリエーション</span></li>
+      <li><b class="num">3,000<i>店</i></b><span>全国の取扱い衣裳店ネットワーク</span></li>
+    </ul>
+    <ol class="flow gr-flow">
+      <li><span class="flow-no num">01</span><h4>サイズを知る</h4><p>身長・胸まわり・ウエストの3つの計測で、63サイズからあなたのサイズがわかります。</p></li>
+      <li><span class="flow-no num">02</span><h4>デザインを選ぶ</h4><p>100型以上のコレクションから、サイズに合うタキシードを検索。</p></li>
+      <li><span class="flow-no num">03</span><h4>衣裳店で試着予約</h4><p>お近くの取扱い衣裳店・式場提携の衣裳室で試着をご予約ください。全国約3,000店。</p></li>
+      <li><span class="flow-no num">04</span><h4>試着する</h4><p>取寄せた実物をご試着。襟のないお洋服でご来店いただくとスムーズです。</p></li>
+      <li><span class="flow-no num">05</span><h4>レンタル決定</h4><p>料金・レンタル期間は衣裳店にてご相談のうえ、ご成約ください。</p></li>
+    </ol>
+    <div class="gr-cta">
+      <a class="btn btn-primary" href="#top">上のファインダーでデザインを見る ↑</a>
+      <p>気になる一着が見つかったら、品番を控えてお近くの衣裳店へ。価格・レンタルのご相談は各取扱い衣裳店にて承ります。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="ft-family">
+    <p class="ft-fam-lab num">MATSUO BRIDAL FAMILY</p>
+    <p class="ft-fam-links">花嫁の一着は <a href="https://atelieryuka.com/" target="_blank" rel="noopener">Atelier Yuka ↗</a><span class="ft-sep" aria-hidden="true">／</span>花婿の一着は <b>with a WISH</b></p>
+  </div>
+  <div class="ft-body">
+    <p class="ft-note">with a WISH は一般のお客様への直接レンタルを行っておりません。お近くの取扱い衣裳店、または Atelier Yuka オンラインショップをご利用ください。</p>
+    <dl class="ft-company">
+      <div><dt>会社名</dt><dd>松尾株式会社／MATSUO</dd></div>
+      <div><dt>創業</dt><dd>1962年1月16日（2015年2月9日 法人設立）</dd></div>
+      <div><dt>代表</dt><dd>代表取締役社長 松尾 祐佳</dd></div>
+      <div><dt>拠点</dt><dd>マツオブライダルサービス（大阪府箕面市）／AtelierYuka 銀座（東京都中央区銀座）ほか</dd></div>
+    </dl>
+    <p class="ft-copy"><small>&copy; 2026 MATSUO Co., Ltd. — デザイン提案サンプル（B案 Working Desk）。掲載のログイン・予約・空き状況・フォームはデモです。</small></p>
+  </div>
+</footer>
+
+<button type="button" class="fab" id="fab" aria-expanded="false" aria-controls="sheet" hidden>絞り込み<span class="fab-badge num" id="fab-badge" hidden>0</span></button>
+
+<div class="ovl" id="sheet-back" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <header class="sheet-hd">
+    <h2 id="sheet-title">絞り込み</h2>
+    <button type="button" class="x-btn" id="sheet-x" aria-label="絞り込みを閉じる">×</button>
+  </header>
+  <div class="sheet-bd" id="sheet-body"></div>
+  <footer class="sheet-ft">
+    <button type="button" class="btn btn-primary" id="sheet-apply"><b class="num" id="sheet-count">125</b> 型を表示</button>
+  </footer>
+</div>
+
+<div class="ovl" id="panel-back" hidden></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden>
+  <header class="panel-hd">
+    <p class="panel-codeline"><span class="panel-code num" id="panel-title">品番 —</span>
+    <button type="button" class="copy-btn" id="panel-copy">品番コピー</button></p>
+    <button type="button" class="x-btn" id="panel-x" aria-label="商品詳細を閉じる">×</button>
+  </header>
+  <div class="panel-bd">
+    <div class="panel-media">
+      <img id="panel-img" src="../../assets/img/p/20432.jpg" alt="" width="642" height="900" loading="lazy">
+      <div class="panel-thumbs" id="panel-thumbs" role="group" aria-label="写真の切り替え"></div>
+    </div>
+    <div class="panel-info">
+      <p class="panel-type num" id="panel-type"></p>
+      <h3 class="panel-name" id="panel-name"></h3>
+      <p class="panel-desc" id="panel-desc"></p>
+      <table class="spec">
+        <caption class="vh">商品スペック</caption>
+        <tbody>
+          <tr><th scope="row">品番</th><td class="num" id="sp-code"></td></tr>
+          <tr><th scope="row">タイプ</th><td id="sp-type"></td></tr>
+          <tr><th scope="row">カラー</th><td id="sp-color"></td></tr>
+          <tr><th scope="row">素材</th><td id="sp-material"></td></tr>
+          <tr><th scope="row">サイズ</th><td id="sp-size"></td></tr>
+          <tr><th scope="row">ライン</th><td id="sp-line"></td></tr>
+          <tr><th scope="row">光沢</th><td id="sp-luster"></td></tr>
+          <tr><th scope="row">その他</th><td id="sp-other"></td></tr>
+          <tr><th scope="row">ご注意</th><td id="sp-caution"></td></tr>
+        </tbody>
+      </table>
+      <div class="panel-brand" id="panel-brand" hidden><h4>生地ブランド</h4><p id="panel-brand-t"></p></div>
+
+      <section class="avail" aria-labelledby="avail-h">
+        <h4 class="panel-sub" id="avail-h">空き状況カレンダー<span class="badge">デモ</span></h4>
+        <table class="cal">
+          <caption class="vh">今後4週間の空き状況（デモデータ）</caption>
+          <thead><tr><th scope="col">月</th><th scope="col">火</th><th scope="col">水</th><th scope="col">木</th><th scope="col">金</th><th scope="col">土</th><th scope="col">日</th></tr></thead>
+          <tbody id="cal-body"></tbody>
+        </table>
+        <p class="cal-legend"><span class="st-ok">○</span> 空きあり　<span class="st-few">△</span> 残りわずか　<span class="st-no">×</span> 貸出不可<br>※デモデータです。実在の在庫状況ではありません。</p>
+      </section>
+
+      <section class="wiz" id="wiz" aria-labelledby="wiz-h">
+        <h4 class="panel-sub" id="wiz-h">予約ウィザード<span class="badge">デモ</span></h4>
+        <ol class="wiz-steps" id="wiz-steps">
+          <li data-ws="1"><b class="num">1</b>日程</li>
+          <li data-ws="2"><b class="num">2</b>店舗情報</li>
+          <li data-ws="3"><b class="num">3</b>確認</li>
+        </ol>
+        <div class="wiz-pane" data-wp="1">
+          <div class="field">
+            <label for="wz-date">ご使用日</label>
+            <input type="date" id="wz-date">
+            <p class="field-err" id="wz-date-err" hidden></p>
+          </div>
+          <dl class="wiz-sched num" id="wz-sched" hidden>
+            <div><dt>予約締切</dt><dd data-ws-out="deadline"></dd></div>
+            <div><dt>出荷</dt><dd data-ws-out="ship"></dd></div>
+            <div><dt>お届け</dt><dd data-ws-out="arrive"></dd></div>
+            <div><dt>ご返送</dt><dd data-ws-out="ret"></dd></div>
+          </dl>
+          <div class="wiz-nav"><button type="button" class="btn btn-primary" data-wnext="2">次へ：店舗情報</button></div>
+        </div>
+        <div class="wiz-pane" data-wp="2" hidden>
+          <div class="field"><label for="wz-shop">店舗名</label><input type="text" id="wz-shop" autocomplete="organization"><p class="field-err" hidden>店舗名をご入力ください。</p></div>
+          <div class="field"><label for="wz-staff">ご担当者</label><input type="text" id="wz-staff" autocomplete="name"><p class="field-err" hidden>ご担当者名をご入力ください。</p></div>
+          <div class="field"><label for="wz-tel">お電話番号</label><input type="tel" id="wz-tel" autocomplete="tel" inputmode="tel" placeholder="072-000-0000"><p class="field-err" hidden>お電話番号をご入力ください（10桁以上）。</p></div>
+          <div class="wiz-nav"><button type="button" class="btn btn-ghost" data-wback="1">戻る</button><button type="button" class="btn btn-primary" data-wnext="3">次へ：確認</button></div>
+        </div>
+        <div class="wiz-pane" data-wp="3" hidden>
+          <dl class="wiz-confirm" id="wz-confirm"></dl>
+          <div class="wiz-nav"><button type="button" class="btn btn-ghost" data-wback="2">戻る</button><button type="button" class="btn btn-primary" id="wz-send">予約を送信（デモ）</button></div>
+        </div>
+        <div class="wiz-done" id="wz-done" hidden tabindex="-1">
+          <p class="done-mark" aria-hidden="true">✓</p>
+          <h5>ご予約を受け付けました（デモ）</h5>
+          <p id="wz-done-t"></p>
+          <p class="rc-note">※デザイン提案サンプルのため、実際の予約は登録されていません。実運用時はメールで確認書をお届けします。</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</aside>
+
+<div class="tray" id="tray" hidden>
+  <p class="tray-lab">比較<b class="num" id="tray-n">0</b><span class="num">/3</span></p>
+  <ul class="tray-items" id="tray-items"></ul>
+  <button type="button" class="btn btn-primary" id="tray-open" disabled>比較する</button>
+  <button type="button" class="tray-clear" id="tray-clear">クリア</button>
+</div>
+
+<div class="cmpv" id="cmpv" role="dialog" aria-modal="true" aria-labelledby="cmpv-h" hidden>
+  <div class="cmpv-in">
+    <header class="cmpv-hd">
+      <h2 id="cmpv-h">比較<span class="sec-en">COMPARE</span></h2>
+      <button type="button" class="x-btn" id="cmpv-x" aria-label="比較を閉じる">×</button>
+    </header>
+    <div class="cmpv-scroll"><table class="cmp-table" id="cmp-table"></table></div>
+  </div>
+</div>
+
+<p class="toast num" id="toast" role="status" aria-live="polite"></p>
+
+<script src="../../assets/data.js"></script>
+<script src="script.js" defer></script>
+<script src="script-b.js" defer></script>
+</body>
+</html>

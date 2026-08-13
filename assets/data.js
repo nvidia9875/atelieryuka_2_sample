@@ -3,7 +3,7 @@
  * 出典: www.withawish.jp (検索CGI・各ページ) 2026-07-18取得
  * 品番・色・ライン・サイズ・素材・説明文・サイズ表は実データ。
  * 空き状況・予約・FAQ の一部文言は提案用デモ(コメントで明示)。
- * 画像パスは ../assets/img/ 基準。
+ * 画像パスは WW.assetBase（このファイルの位置）基準で組み立てる。
  */
 
 const WW = {
@@ -319,7 +319,17 @@ WW.schedule = function (useDateStr, today) {
   };
 };
 
+/**
+ * assets/ の位置は読み込み元ページの深さで変わる（ルートの本体 / archive/配下の旧案）。
+ * このファイル自身の URL から基準を取れば、どの階層から読まれても、
+ * GitHub Pages のサブパス配信でも同じ式で解決できる。
+ */
+WW.assetBase = (function () {
+  const self = document.currentScript;
+  return self ? self.src.replace(/[^/]*$/, "") : "assets/";
+})();
+
 /** 商品画像パス */
 WW.img = function (p, extra) {
-  return "../assets/img/p/" + p.code + (extra ? "_" + extra : "") + ".jpg";
+  return WW.assetBase + "img/p/" + p.code + (extra ? "_" + extra : "") + ".jpg";
 };
