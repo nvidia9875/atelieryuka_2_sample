@@ -216,8 +216,6 @@ h1, h2, h3, h4 { font-weight: 500; }
   margin-top: 1.6em;
   font-size: var(--fs-sm); color: var(--ivory-dim);
 }
-.section-act { margin-top: 1.8em; }
-.section-act .chip-demo { margin-left: 0.8em; }
 .sub-head {
   text-align: center;
   font-family: var(--serif-ja);
@@ -310,20 +308,6 @@ h1, h2, h3, h4 { font-weight: 500; }
 }
 
 /* ---------- 厳選コレクション（肖像画ギャラリー） ---------- */
-.portrait-wall {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: clamp(18px, 3vw, 36px) clamp(14px, 2.4vw, 30px);
-  max-width: 1220px; margin: 0 auto;
-}
-.portrait-wall > li { width: clamp(158px, 21vw, 216px); }
-.portrait-card {
-  display: block; width: 100%;
-  background: none; border: 0; cursor: pointer;
-  text-align: center;
-}
-.portrait-card .p-frame { transition: transform 0.5s var(--ease-out); }
-.portrait-card:hover .p-frame { transform: translateY(-6px); }
-.portrait-card figcaption { margin-top: 0.8rem; }
 .p-code {
   display: block;
   font-family: var(--serif-en); font-weight: 500;

@@ -328,3 +328,17 @@
   .cat-lead { grid-template-columns: 220px minmax(0, 1fr); }
   .cat-lead-cover { margin: 0; }
 }
+
+/* ---------- 画面が低いとき（スマホ横向きなど） ----------
+   740×360 実測で誌面の高さが 169px しか残らず、バーとフッタで
+   画面の半分以上を食っていた。誌面に高さを返す。 */
+@media (max-height: 520px) {
+  .cat-bar { padding: 0.4em clamp(10px, 2vw, 18px); }
+  .cat-x { width: 34px; height: 34px; }
+  .cat-page { padding: 6px; }
+  .cat-foot { padding: 0.35em clamp(10px, 2vw, 18px) 0.45em; gap: 0.3em 1rem; }
+  .cat-zbtn { min-width: 30px; height: 30px; }
+  /* 注記は誌面を削ってまで出す情報ではない。ビューアを閉じればページ本文にある */
+  .cat-note { display: none; }
+  .cat-thumbs { max-height: 46vh; }
+}

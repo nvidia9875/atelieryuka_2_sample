@@ -354,7 +354,6 @@ body:has(dialog[open]) { overflow: hidden; }
   overflow-y: auto;
   max-height: calc(100vh - 48px);
 }
-.dialog-narrow { max-width: 460px; margin: 0 auto; }
 .dialog-close {
   position: absolute; top: 10px; right: 10px; z-index: 2;
   width: 44px; height: 44px;
@@ -372,12 +371,6 @@ body:has(dialog[open]) { overflow: hidden; }
   font-size: clamp(1.2rem, 1.05rem + 1vw, 1.5rem);
   letter-spacing: 0.14em; line-height: 1.7;
 }
-.dialog-lead { font-size: var(--fs-sm); color: var(--ivory-dim); margin: 1.2em 0 1.6em; }
-.done-title {
-  font-family: var(--serif-ja); font-size: 1.05rem; letter-spacing: 0.14em;
-  text-align: center; margin: 0.8em 0 1.2em;
-}
-.demo-note { margin-top: 1.2em; font-size: var(--fs-2xs); font-weight: var(--wt-small); color: var(--ivory-faint); }
 
 /* ---------- product dialog ---------- */
 .pd-grid {
@@ -466,8 +459,6 @@ body:has(dialog[open]) { overflow: hidden; }
   .flow-list p { max-width: none; }
 }
 @media (max-width: 560px) {
-  .portrait-wall { gap: 18px 12px; }
-  .portrait-wall > li { width: calc(50% - 6px); max-width: 200px; }
   .p-grid { grid-template-columns: repeat(2, 1fr); }
   .num-gallery { gap: 10px; }
   .num-frame { padding: 1.4rem 0.6rem; }

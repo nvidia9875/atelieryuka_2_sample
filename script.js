@@ -285,8 +285,9 @@
       var strong = document.createElement("strong");
       strong.textContent = "推定サイズ: " + r.label;
       result.appendChild(strong);
+      /* 入力値の復唱と誤読されやすいので、寸法表の値であることを明示する */
       result.appendChild(document.createTextNode(
-        "（参考: 身長" + r.spec.height + " / 胸囲" + r.spec.chest + " / ウエスト" + r.spec.waist + "）"
+        "（このサイズの標準寸法: 身長" + r.spec.height + " / 胸囲" + r.spec.chest + " / ウエスト" + r.spec.waist + "）"
       ));
       var note = document.createElement("span");
       note.className = "size-note";
@@ -432,7 +433,7 @@
 
   document.addEventListener("click", function (event) {
     var card = event.target.closest("[data-code]");
-    if (card && (card.classList.contains("p-card") || card.classList.contains("portrait-card"))) {
+    if (card && card.classList.contains("p-card")) {
       openProduct(card.getAttribute("data-code"));
     }
   });
@@ -594,21 +595,37 @@
     sentinel.setAttribute("aria-hidden", "true");
     dock.parentNode.insertBefore(sentinel, dock);
 
+    /* SPは CSS 側で position:static にして吸着させていない（操作はシート経由）。
+       そこで高さを配ると、実際には固定されていないのに scroll-margin-top だけが
+       効いてしまい、scrollIntoView の着地がドック高ぶん下へずれる。
+       実際に sticky で組まれているときだけ吸着として扱う。 */
+    function isSticky() {
+      return window.getComputedStyle(dock).position === "sticky";
+    }
+
+    var passedTop = false;
+
     /* 吸着中の実高を CSS へ返す。これが無いと scrollIntoView した要素が
        ドックの下に潜り込み、クリックできなくなる */
-    function publishHeight() {
-      var h = dock.classList.contains("is-stuck") ? dock.getBoundingClientRect().height : 0;
-      document.documentElement.style.setProperty("--dock-h", Math.round(h) + "px");
+    function sync() {
+      var stuck = passedTop && isSticky();
+      dock.classList.toggle("is-stuck", stuck);
+      var h = stuck ? Math.round(dock.getBoundingClientRect().height) : 0;
+      document.documentElement.style.setProperty("--dock-h", h + "px");
     }
+
     new IntersectionObserver(function (entries) {
       /* 番兵が「画面より上」に出たときだけ吸着。単に !isIntersecting とすると
          まだ番兵に到達していない（画面より下）状態も拾ってしまう */
       var e = entries[0];
-      dock.classList.toggle("is-stuck", !e.isIntersecting && e.boundingClientRect.top < 0);
-      publishHeight();
+      passedTop = !e.isIntersecting && e.boundingClientRect.top < 0;
+      sync();
     }, { threshold: 0 }).observe(sentinel);
-    if ("ResizeObserver" in window) new ResizeObserver(publishHeight).observe(dock);
-    publishHeight();
+
+    if ("ResizeObserver" in window) new ResizeObserver(sync).observe(dock);
+    /* SP↔PC をまたぐと position が変わる。ドックの寸法が変わらない場合でも拾う */
+    window.addEventListener("resize", sync);
+    sync();
   })();
 
   /* ---------- 11. 絞り込みシート（SP） ---------- */

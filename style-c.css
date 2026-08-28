@@ -5,8 +5,7 @@
    ========================================================= */
 
 /* ---------- 共通: 視覚的に隠す（読み上げには残す） ---------- */
-.vh,
-.vh-when-stuck {
+.vh {
   position: absolute !important;
   width: 1px; height: 1px;
   margin: -1px; padding: 0; overflow: hidden;
