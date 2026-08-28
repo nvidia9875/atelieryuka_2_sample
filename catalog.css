@@ -265,3 +265,66 @@
 @media (prefers-reduced-motion: reduce) {
   .cat-track { scroll-behavior: auto; }
 }
+
+/* =========================================================
+   カタログへの導線（コレクション章）
+   小さなテキストボタンでは「冊子が丸ごと読める」ことが伝わらないため、
+   表紙・仕様・2つの行き先を1ブロックにまとめて出す。
+   ========================================================= */
+.cat-lead {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 2.8rem);
+  border: 1px solid var(--gold-line);
+  background: var(--ink-raised);
+  scroll-margin-top: 1.5rem;
+}
+.cat-lead-cover {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  display: block; width: 100%; max-width: 220px;
+  margin: 0 auto;
+  transition: transform 0.45s var(--ease-out);
+}
+.cat-lead-cover:hover { transform: translateY(-4px); }
+.cat-lead-cover img { width: 100%; height: auto; }
+.cat-lead-title {
+  font-family: var(--serif-ja);
+  font-size: clamp(1.2rem, 1.05rem + 1vw, 1.5rem);
+  letter-spacing: 0.16em; line-height: 1.7;
+  margin-top: 0.5em;
+}
+.cat-lead-desc {
+  margin-top: 1em;
+  font-size: var(--fs-sm); color: var(--ivory-dim);
+}
+.cat-lead-spec {
+  display: flex; flex-wrap: wrap; gap: 0.5em 1.4em;
+  margin-top: 1.2em;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  letter-spacing: var(--ls-wide);
+  color: var(--ivory-faint);
+}
+.cat-lead-spec li { position: relative; padding-left: 1em; }
+.cat-lead-spec li::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 6px; height: 1px; background: var(--gold);
+}
+.cat-lead-acts {
+  display: flex; flex-wrap: wrap; gap: 0.8em;
+  margin-top: 1.8em;
+}
+.cat-lead-acts .btn { padding: 0.9em 1.8em; }
+.cat-lead-ext { margin-left: 0.6em; }
+.cat-lead-note {
+  margin-top: 1.4em;
+  font-size: var(--fs-2xs); font-weight: var(--wt-small);
+  color: var(--ivory-faint);
+}
+
+@media (min-width: 721px) {
+  .cat-lead { grid-template-columns: 220px minmax(0, 1fr); }
+  .cat-lead-cover { margin: 0; }
+}

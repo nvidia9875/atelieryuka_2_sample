@@ -28,6 +28,7 @@
     <nav class="site-nav" aria-label="メインナビゲーション">
       <ul>
         <li><a href="#collection">COLLECTION</a></li>
+        <li><a href="#catalogue">CATALOGUE</a></li>
         <li><a href="#story">STORY</a></li>
         <li><a href="#flow">HOW TO</a></li>
         <li><a href="#desk">衣裳店さまへ</a></li>
@@ -81,7 +82,31 @@
       <h2 id="collection-heading">コレクション</h2>
       <div class="rule" aria-hidden="true"></div>
       <p class="section-lead">全125型のタキシードから、品番・色・シルエット・体型でお選びいただけます。</p>
-      <p class="section-act"><button type="button" class="btn btn-quiet btn-sm" data-desk="catalog">カタログをめくる<span class="chip-demo">全58ページ</span></button></p>
+    </div>
+
+    <!-- カタログ導線: 冊子であることが一目で伝わるよう表紙を出し、
+         「ブラウザでめくる」と「PDFを開く」の2つの行き先を並べて示す -->
+    <div class="cat-lead reveal" id="catalogue">
+      <button type="button" class="cat-lead-cover" data-catalog aria-label="デジタルカタログをめくって見る">
+        <span class="p-frame">
+          <img src="assets/catalog/pages/01.webp" alt="デジタルカタログの表紙" width="1200" height="1683" loading="lazy" decoding="async">
+        </span>
+      </button>
+      <div class="cat-lead-body">
+        <p class="eyebrow">Digital Catalogue</p>
+        <h3 class="cat-lead-title">カタログを見る</h3>
+        <p class="cat-lead-desc">冊子のカタログを、そのままブラウザでご覧いただけます。スマートフォンはスワイプ、PCは見開き。拡大すれば生地のディテールまでご確認いただけます。</p>
+        <ul class="cat-lead-spec" role="list">
+          <li>全58ページ</li>
+          <li>ダウンロード不要</li>
+          <li>PDF 25MB</li>
+        </ul>
+        <div class="cat-lead-acts">
+          <button type="button" class="btn btn-gold" data-catalog>ブラウザでめくる</button>
+          <a class="btn btn-quiet" href="assets/catalog/atelieryuka-catalog-2026.pdf" target="_blank" rel="noopener">PDFを開く<span class="cat-lead-ext" aria-hidden="true">↗</span></a>
+        </div>
+        <p class="cat-lead-note">本デモには Atelier Yuka 2026 カタログを仮置きしています。公開時は with a WISH のカタログに差し替えます。</p>
+      </div>
     </div>
 
     <h3 class="sub-head" id="archive-heading"><span class="sub-en">The Archive</span>すべてのコレクションから探す</h3>
@@ -195,36 +220,13 @@
     </ul>
   </section>
 
-  <!-- 5. 衣裳店デスク -->
+  <!-- 5. 衣裳店さまへ（納期・連絡先） -->
   <section class="section section-raised" id="desk" aria-labelledby="desk-heading">
     <div class="section-head reveal">
-      <p class="eyebrow">Ⅳ &middot; Concierge</p>
-      <h2 id="desk-heading">衣裳店デスク</h2>
+      <p class="eyebrow">Ⅳ &middot; Contact</p>
+      <h2 id="desk-heading">衣裳店さまへ</h2>
       <div class="rule" aria-hidden="true"></div>
-      <p class="section-lead">お取扱い衣裳店さまのための執務室。空き状況・ご予約・カタログ・販促素材を、ログインなしでそのままお使いいただけます。</p>
     </div>
-    <ul class="desk-cards" role="list">
-      <li><button type="button" class="desk-card reveal" data-desk="avail">
-        <span class="chip-demo">デモ</span><span class="desk-no">Ⅰ</span>
-        <span class="desk-title">空き状況チェック</span>
-        <span class="desk-desc">ご希望の商品・お日にちの空き状況を24時間確認できます。</span>
-      </button></li>
-      <li><button type="button" class="desk-card reveal" data-desk="reserve">
-        <span class="chip-demo">デモ</span><span class="desk-no">Ⅱ</span>
-        <span class="desk-title">WEB予約登録</span>
-        <span class="desk-desc">出荷前日24時まで、その場で予約完了。確認書はメールでお届け。</span>
-      </button></li>
-      <li><button type="button" class="desk-card reveal" data-desk="catalog">
-        <span class="chip-demo">デモ</span><span class="desk-no">Ⅲ</span>
-        <span class="desk-title">デジタルカタログ</span>
-        <span class="desk-desc">冊子カタログをそのままブラウザで。スマートフォンはスワイプ、PCは見開きでめくれます。</span>
-      </button></li>
-      <li><button type="button" class="desk-card reveal" data-desk="assets">
-        <span class="chip-demo">デモ</span><span class="desk-no">Ⅳ</span>
-        <span class="desk-title">販促素材ダウンロード</span>
-        <span class="desk-desc">商品写真・ロゴ・POPデータを自店のサイトやSNSでご利用いただけます。</span>
-      </button></li>
-    </ul>
     <div class="desk-lower">
       <div class="checker reveal">
         <h3><span class="sub-en">Schedule</span>納期チェッカー</h3>
@@ -408,89 +410,10 @@
   </div>
 </dialog>
 
-<!-- 衣裳店デスク: 空き状況チェック（デモ） -->
-<dialog id="avail-dialog" aria-labelledby="avail-title">
-  <button type="button" class="dialog-close" data-close aria-label="閉じる">&times;</button>
-  <div class="dialog-inner">
-    <p class="eyebrow">Concierge Ⅰ</p>
-    <h2 id="avail-title">空き状況チェック<span class="chip-demo">デモ</span></h2>
-    <div class="desk-tool">
-      <div class="finder-field desk-tool-field">
-        <label for="av-code">品番</label>
-        <input id="av-code" type="text" inputmode="numeric" autocomplete="off" placeholder="例: 20432" maxlength="5">
-      </div>
-      <p class="desk-tool-note" id="av-name"></p>
-      <table class="cal" id="av-cal">
-        <caption class="cal-cap">今後4週間の空き状況</caption>
-        <thead><tr><th scope="col">月</th><th scope="col">火</th><th scope="col">水</th><th scope="col">木</th><th scope="col">金</th><th scope="col">土</th><th scope="col">日</th></tr></thead>
-        <tbody id="av-body"></tbody>
-      </table>
-      <p class="cal-legend"><span class="st-ok">○</span> 空きあり　<span class="st-few">△</span> 残りわずか　<span class="st-no">×</span> 貸出不可</p>
-      <p class="desk-tool-note">※提案用のデモ表示です。実在の在庫状況ではありません。</p>
-    </div>
-  </div>
-</dialog>
 
-<!-- 衣裳店デスク: WEB予約登録（デモ・3ステップ） -->
-<dialog id="reserve-dialog" aria-labelledby="reserve-title">
-  <button type="button" class="dialog-close" data-close aria-label="閉じる">&times;</button>
-  <div class="dialog-inner dialog-narrow">
-    <p class="eyebrow">Concierge Ⅱ</p>
-    <h2 id="reserve-title">WEB予約登録<span class="chip-demo">デモ</span></h2>
-    <ol class="wiz-steps" id="wiz-steps" role="list">
-      <li aria-current="step">ご使用日</li><li>店舗情報</li><li>確認</li>
-    </ol>
-    <div class="wiz-pane" data-wp="1">
-      <div class="invite-field">
-        <label for="rv-code">品番</label>
-        <input type="text" id="rv-code" inputmode="numeric" autocomplete="off" placeholder="例: 20432" maxlength="5">
-      </div>
-      <div class="invite-field">
-        <label for="rv-date">ご使用日</label>
-        <input type="date" id="rv-date">
-      </div>
-      <p class="field-error" id="rv-err1" hidden></p>
-      <dl class="sched-dl" id="rv-sched" hidden></dl>
-      <div class="wiz-nav"><button type="button" class="btn btn-gold btn-sm" data-wnext="2">次へ：店舗情報</button></div>
-    </div>
-    <div class="wiz-pane" data-wp="2" hidden>
-      <div class="invite-field"><label for="rv-shop">店舗名</label><input type="text" id="rv-shop" autocomplete="organization"></div>
-      <div class="invite-field"><label for="rv-staff">ご担当者</label><input type="text" id="rv-staff" autocomplete="name"></div>
-      <div class="invite-field"><label for="rv-tel">お電話番号</label><input type="tel" id="rv-tel" autocomplete="tel" inputmode="tel" placeholder="072-000-0000"></div>
-      <p class="field-error" id="rv-err2" hidden></p>
-      <div class="wiz-nav"><button type="button" class="btn btn-quiet btn-sm" data-wback="1">戻る</button><button type="button" class="btn btn-gold btn-sm" data-wnext="3">次へ：確認</button></div>
-    </div>
-    <div class="wiz-pane" data-wp="3" hidden>
-      <dl class="pd-dl" id="rv-confirm"></dl>
-      <div class="wiz-nav"><button type="button" class="btn btn-quiet btn-sm" data-wback="2">戻る</button><button type="button" class="btn btn-gold btn-sm" id="rv-send">予約を送信（デモ）</button></div>
-    </div>
-    <div class="wiz-done" id="rv-done" hidden tabindex="-1">
-      <p class="done-title">ご予約を承りました。</p>
-      <p class="desk-tool-note" id="rv-done-t"></p>
-      <p class="demo-note">提案用のデモです。実際の予約システムへの登録は行われていません。</p>
-    </div>
-  </div>
-</dialog>
 
-<!-- 衣裳店デスク: 販促素材ダウンロード（デモ） -->
-<dialog id="assets-dialog" aria-labelledby="assets-title">
-  <button type="button" class="dialog-close" data-close aria-label="閉じる">&times;</button>
-  <div class="dialog-inner dialog-narrow">
-    <p class="eyebrow">Concierge Ⅳ</p>
-    <h2 id="assets-title">販促素材ダウンロード<span class="chip-demo">デモ</span></h2>
-    <p class="dialog-lead">商品写真・ロゴ・POPデータを、自店のサイトやSNSでご利用いただけます。</p>
-    <ul class="asset-list" role="list">
-      <li><span class="asset-name">商品写真一式<span class="asset-meta">JPG / 全125型 / 約1.2GB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="商品写真一式">取得</button></li>
-      <li><span class="asset-name">ブランドロゴ<span class="asset-meta">AI・PNG / 約8MB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="ブランドロゴ">取得</button></li>
-      <li><span class="asset-name">店頭POPテンプレート<span class="asset-meta">PDF / A4・B2 / 約24MB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="店頭POPテンプレート">取得</button></li>
-      <li><span class="asset-name">SNS用バナー<span class="asset-meta">PNG / 正方形・ストーリー / 約36MB</span></span><button type="button" class="btn btn-quiet btn-sm" data-asset="SNS用バナー">取得</button></li>
-    </ul>
-    <p class="desk-tool-note" id="asset-done" role="status"></p>
-    <p class="demo-note">提案用のデモです。実ファイルの配信は行われていません。</p>
-  </div>
-</dialog>
 
-<!-- 衣裳店デスク: デジタルカタログ（冊子ビューア） -->
+<!-- デジタルカタログ（冊子ビューア） -->
 <dialog id="catalog-dialog" aria-labelledby="cat-title">
   <div class="cat-shell">
     <div class="cat-bar">

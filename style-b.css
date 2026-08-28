@@ -44,46 +44,7 @@
   max-width: 1080px; margin: 0 auto;
 }
 
-/* ---------- 衣裳店デスク ---------- */
-.desk-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(12px, 1.8vw, 22px);
-  max-width: 1140px; margin: 0 auto;
-}
-.desk-card {
-  position: relative;
-  display: flex; flex-direction: column; align-items: center;
-  width: 100%; height: 100%;
-  gap: 0.55em;
-  background: var(--ink);
-  border: 1px solid var(--gold-line);
-  padding: 2.1rem 1.1rem 1.8rem;
-  text-align: center; cursor: pointer;
-}
-.desk-card::before {
-  content: ""; position: absolute; inset: 6px;
-  border: 1px solid var(--line);
-  pointer-events: none;
-}
-.desk-card::after {
-  content: ""; position: absolute; inset: 0;
-  box-shadow: inset 0 0 40px var(--gold-glow), 0 0 20px var(--gold-glow);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.6s ease;
-}
-.desk-card:hover::after { opacity: 1; }
-.desk-card .chip-demo { position: absolute; top: 12px; right: 12px; }
-.desk-no {
-  font-family: var(--serif-en); font-weight: 500; font-style: italic;
-  font-size: 1.5rem; color: var(--gold-text); line-height: 1.2;
-}
-.desk-title {
-  font-family: var(--serif-ja); font-weight: 500;
-  font-size: 0.98rem; letter-spacing: 0.14em;
-}
-.desk-desc { font-size: var(--fs-xs); line-height: 1.9; color: var(--ivory-dim); }
-
+/* ---------- 衣裳店さまへ（納期・連絡先） ---------- */
 .desk-lower {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
@@ -481,7 +442,6 @@ body:has(dialog[open]) { overflow: hidden; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 960px) {
-  .desk-cards { grid-template-columns: repeat(2, 1fr); }
   .desk-lower { grid-template-columns: 1fr; }
   .merit-list { grid-template-columns: 1fr; max-width: 560px; }
   .merit { border-top: 1px solid var(--gold-line); padding-bottom: 0.6rem; }
@@ -518,7 +478,6 @@ body:has(dialog[open]) { overflow: hidden; }
   .size-aid-fields .finder-field { min-width: calc(50% - 0.5rem); }
   .checker-form .finder-field { min-width: 100%; }
   .tabs [role="tab"] { padding: 0.9em 1.1em; font-size: 0.88rem; }
-  .desk-cards { grid-template-columns: 1fr; max-width: 380px; margin-inline: auto; }
   .company-dl > div { grid-template-columns: 1fr; gap: 0.15em; }
 }
 @media (max-width: 400px) {
