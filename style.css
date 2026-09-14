@@ -88,8 +88,9 @@ h1, h2, h3, h4 { font-weight: 500; }
 .skip-link:focus-visible { top: 8px; }
 
 /* ---------- utility bar ---------- */
+/* 3案比較をやめ、中身は但し書き1つだけになったので中央に置く */
 .util-bar {
-  display: flex; justify-content: space-between; align-items: center; gap: 1em;
+  display: flex; justify-content: center; align-items: center; gap: 1em;
   padding: 0.55em var(--pad-x);
   border-bottom: 1px solid var(--line);
   font-size: var(--fs-2xs); font-weight: var(--wt-small);
